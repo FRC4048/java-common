@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.usfirst.frc4048</groupId>
+    <artifactId>java-common</artifactId>
+    <version>1.0.0</version>
+
+    <name>java-common</name>
+
+    <properties>
+        <wpilib.version>2019.4.1</wpilib.version>
+        <ctre.version>5.12.0</ctre.version>
+        <revrobotics.version>1.0.27</revrobotics.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>edu.wpi.first.wpilibj</groupId>
+            <artifactId>wpilibj-java</artifactId>
+            <version>${wpilib.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>edu.wpi.first.ntcore</groupId>
+            <artifactId>ntcore-java</artifactId>
+            <version>${wpilib.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>edu.wpi.first.cscore</groupId>
+            <artifactId>cscore-java</artifactId>
+            <version>${wpilib.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>edu.wpi.first.hal</groupId>
+            <artifactId>hal-java</artifactId>
+            <version>${wpilib.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ctre.phoenix</groupId>
+            <artifactId>api-java</artifactId>
+            <version>${ctre.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ctre.phoenix</groupId>
+            <artifactId>wpiapi-java</artifactId>
+            <version>${ctre.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.revrobotics.frc</groupId>
+            <artifactId>SparkMax-java</artifactId>
+            <version>${revrobotics.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>2.4.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>wpilib-release</id>
+            <name>Wpilib Releases Repo</name>
+            <url>https://first.wpi.edu/FRC/roborio/maven/release/</url>
+        </repository>
+
+        <repository>
+            <id>ctre-release</id>
+            <name>CTRE Releases Repo</name>
+            <url>http://devsite.ctr-electronics.com/maven/release/</url>
+        </repository>
+
+        <repository>
+            <id>revrobotics-release</id>
+            <name>Rev Robotics Releases Repo</name>
+            <url>http://www.revrobotics.com/content/sw/max/sdk/maven/</url>
+        </repository>
+    </repositories>
+
+</project>
+
