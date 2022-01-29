@@ -7,6 +7,7 @@
 
 package org.usfirst.frc4048.common.util;
 
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
@@ -21,8 +22,8 @@ public class DoubleSolenoidUtil {
     }
 
     public DoubleSolenoidUtil(int pcm, int fwd, int rev) {
-        fwdPiston = new Solenoid(pcm, fwd);
-        revPiston = new Solenoid(pcm, rev);
+        fwdPiston = new Solenoid(pcm, PneumaticsModuleType.CTREPCM, fwd);
+        revPiston = new Solenoid(pcm, PneumaticsModuleType.CTREPCM, rev);
     }
 
     public void set(State state) {

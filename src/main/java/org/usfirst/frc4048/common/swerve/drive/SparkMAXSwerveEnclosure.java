@@ -1,14 +1,45 @@
 package org.usfirst.frc4048.common.swerve.drive;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 
 /**
  * An implementation of the SwerveEnclosure using SparkMAX motors and encoders
  */
 public class SparkMAXSwerveEnclosure extends BaseEnclosure implements SwerveEnclosure {
 
+	public SparkMAXSwerveEnclosure(String name, double gearRatio) {
+		super(name, gearRatio);
+	}
+
+	@Override
+	protected int getEncPosition() {
+		return 0;
+	}
+
+	@Override
+	protected void setEncPosition(int encPosition) {
+
+	}
+
+	@Override
+	protected void setSpeed(double speed) {
+
+	}
+
+	@Override
+	protected void setAngle(double angle) {
+
+	}
+
+	@Override
+	public void stop() {
+
+	}
+/***
+ * The following code is commented out since the WPI_TalonSRX has a build issue (It is using
+ * Sendable from the wrong package). Since we don't need swerve enclosure so far, this code is commented out.
+ *
     private Spark driveMotor;
 	private WPI_TalonSRX steerMotor;
 	
@@ -78,4 +109,6 @@ public class SparkMAXSwerveEnclosure extends BaseEnclosure implements SwerveEncl
 	{
 		this.reverseSteer = reverseSteer;
 	}
+
+	***/
 }

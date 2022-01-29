@@ -8,8 +8,9 @@
 package org.usfirst.frc4048.common.smartshuffleboard;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.shuffleboard.*;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
 
 import java.util.*;
 
@@ -20,12 +21,12 @@ public class SmartShuffleboardTab {
     private Map<String, SimpleWidget> widgetMap = new HashMap();
     private Set<String> commandSet = new HashSet<>();
     private ShuffleboardTab tab;
-     
-    SmartShuffleboardTab(String tabName) 
+
+    SmartShuffleboardTab(String tabName)
     {
         tab = Shuffleboard.getTab(tabName);
     }
-         
+
     public SimpleWidget getWidget(String fieldName)     // return widget handle
     {
         return widgetMap.get(fieldName);
@@ -35,13 +36,13 @@ public class SmartShuffleboardTab {
     {
         try {
             return tab.getLayout(layoutName);
-        }   
+        }
         catch (Exception noSuchElementException)
         {
             return null;
         }
     }
-         
+
     public void put(String fieldName, Object value)   //primitive
     {
         SimpleWidget widget = widgetMap.get(fieldName);
@@ -56,7 +57,7 @@ public class SmartShuffleboardTab {
             widgetMap.put(fieldName, widget);
         }
     }
- 
+
     public void put(String fieldName, String layoutName, Object value)   //primitive
     {
         ShuffleboardLayout layout;
@@ -79,7 +80,7 @@ public class SmartShuffleboardTab {
             widgetMap.put(fieldName, widget);
         }
     }
-    public void putCommand(String fieldName, Command cmd) 
+    public void putCommand(String fieldName, CommandBase cmd)
     {
         if (!commandSet.contains(fieldName))
         {

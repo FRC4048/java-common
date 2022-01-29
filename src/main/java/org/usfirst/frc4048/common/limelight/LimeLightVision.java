@@ -5,7 +5,6 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class LimeLightVision {
-
     public static final int LED_ON = 3;
     public static final int LED_BLINK = 2;
     public static final int LED_OFF = 1;
@@ -13,7 +12,7 @@ public class LimeLightVision {
     private double cameraHeight;
     private double targetHeight;
     private double cameraAngle;
-    
+
     NetworkTable table;
     NetworkTableEntry tv;
     NetworkTableEntry tx;
@@ -62,7 +61,7 @@ public class LimeLightVision {
         double validTarget = tv.getDouble(0.0);
         if ( validTarget != 1.0 ) {
             return null;
-        }
+    }
 
         double x = tx.getDouble(0.0);
         double y = ty.getDouble(0.0);
@@ -107,7 +106,7 @@ public class LimeLightVision {
     public void setStream(double option) {
         if (option >= 0.0 && option <= 2.0)
         {
-           stream.setDouble(option);
+            stream.setDouble(option);
         }
     }
 

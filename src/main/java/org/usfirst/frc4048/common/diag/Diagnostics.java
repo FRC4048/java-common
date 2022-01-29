@@ -1,8 +1,8 @@
 package org.usfirst.frc4048.common.diag;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * Use addDiagnosable() to add new components to the list - NOTE: Make sure they are only added to the list ONCE in the
  * Robot's lifetime (e.g. in the subsystem constructor).
  */
-public class Diagnostics extends Subsystem {
+public class Diagnostics extends SubsystemBase {
 
     public static final String SHUFFLEBOARD_TAB_NAME =  "Diagnostics";
 
@@ -22,8 +22,6 @@ public class Diagnostics extends Subsystem {
     private List<Diagnosable> diagnosables;
 
     public Diagnostics() {
-        super("Diagnostics");
-
         shuffleBoardTab = Shuffleboard.getTab(SHUFFLEBOARD_TAB_NAME);
         diagnosables = new ArrayList<>();
 
@@ -37,11 +35,6 @@ public class Diagnostics extends Subsystem {
         addDiagnosable(new DiagOpticalRangeFinder("OpticalRangeFinder1", new OpticalRangeFinder(new AnalogInput(1)), shuffleBoardTab, 3.0, 12.0));
         addDiagnosable(new DiagSonar("Sonar1", new Ultrasonic(3, 4), shuffleBoardTab, 3.0, 12.0));
         */
-    }
-
-    @Override
-    protected void initDefaultCommand() {
-        // Do nothing
     }
 
     public void addDiagnosable(Diagnosable diagnosable) {

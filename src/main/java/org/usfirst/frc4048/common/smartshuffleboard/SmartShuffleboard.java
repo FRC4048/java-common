@@ -7,25 +7,26 @@
 
 package org.usfirst.frc4048.common.smartshuffleboard;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
  * This is a wrapper around the Shuffleboard class to make it easier to add data to shuffleboard.
  * Adding and updating a value is done in the same manner, and there's no need to handle networkTable entries.
  * Data can be displayed in its own widget or items can be grouped into a list widget.
  * Example:
- * 
+ *
  *                          tab name   list name    field name       value
  *     SmartShuffleboard.put("Drive", "encoders", "Front Right", steerFR.getSelectedSensorPosition(0));
  *     SmartShuffleboard.put("Drive", "encoders", "Front Left", steerFL.getSelectedSensorPosition(0));
  *     SmartShuffleboard.put("Drive", "encoders", "Rear Right", steerRR.getSelectedSensorPosition(0));
  *     SmartShuffleboard.put("Drive", "encoders", "Rear Left", steerRL.getSelectedSensorPosition(0));
- * 
+ *
  *                           tab name   field name    value
  *     SmartShuffleboard.put("Drive", "Gyro", getGyro());
  */
@@ -45,7 +46,7 @@ public class SmartShuffleboard {
         smartTab.put(fieldName, layoutName, value);
     }
 
-    public static void putCommand(String tabName, String fieldName, Command cmd)    // value is primitive
+    public static void putCommand(String tabName, String fieldName, CommandBase cmd)    // value is primitive
     {
         SmartShuffleboardTab smartTab = getOrCreateTab(tabName);
         smartTab.putCommand(fieldName, cmd);
@@ -88,5 +89,4 @@ public class SmartShuffleboard {
         }
         return smartTab;
     }
-
 }

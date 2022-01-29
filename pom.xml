@@ -11,9 +11,10 @@
     <name>java-common</name>
 
     <properties>
-        <wpilib.version>2019.4.1</wpilib.version>
-        <ctre.version>5.12.0</ctre.version>
-        <revrobotics.version>1.0.27</revrobotics.version>
+        <wpilib.version>2022.2.1</wpilib.version>
+        <ctre.version>5.19.4</ctre.version>
+        <navx-java.version>4.0.442</navx-java.version>
+        <REVLib-java.version>2022.1.1</REVLib-java.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
@@ -24,6 +25,18 @@
         <dependency>
             <groupId>edu.wpi.first.wpilibj</groupId>
             <artifactId>wpilibj-java</artifactId>
+            <version>${wpilib.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>edu.wpi.first.wpiutil</groupId>
+            <artifactId>wpiutil-java</artifactId>
+            <version>${wpilib.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>edu.wpi.first.wpilibNewCommands</groupId>
+            <artifactId>wpilibNewCommands-java</artifactId>
             <version>${wpilib.version}</version>
         </dependency>
 
@@ -59,8 +72,14 @@
 
         <dependency>
             <groupId>com.revrobotics.frc</groupId>
-            <artifactId>SparkMax-java</artifactId>
-            <version>${revrobotics.version}</version>
+            <artifactId>REVLib-java</artifactId>
+            <version>${REVLib-java.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.kauailabs.navx.frc</groupId>
+            <artifactId>navx-java</artifactId>
+            <version>${navx-java.version}</version>
         </dependency>
 
         <dependency>
@@ -96,10 +115,15 @@
 
         <repository>
             <id>revrobotics-release</id>
-            <name>Rev Robotics Releases Repo</name>
-            <url>http://www.revrobotics.com/content/sw/max/sdk/maven/</url>
+            <name>Rev Robotics Repo</name>
+            <url>https://maven.revrobotics.com/</url>
+        </repository>
+
+        <repository>
+            <id>local-wpilib-install</id>
+            <name>Local copy of libraries from wpilib installation</name>
+            <url>file://${user.home}/wpilib/2022/maven</url>
         </repository>
     </repositories>
 
 </project>
-

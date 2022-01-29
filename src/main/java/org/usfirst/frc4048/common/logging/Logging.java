@@ -2,7 +2,6 @@ package org.usfirst.frc4048.common.logging;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
-import org.usfirst.frc4048.common.util.TaskExecutor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,7 +18,7 @@ public class Logging {
   /**
    * Logger will log every number of iterations specified here
    */
-  private static final int LOGGING_FREQ = 1;
+  private static final int LOGGING_FREQ = 5;
 
   /**
    * Time period in milliseconds between writing to the log file by the dedicated
@@ -56,7 +55,7 @@ public class Logging {
 
   private final WorkQueue wq;
   private int counter = 0;
-  
+
   public final static DecimalFormat df5 = new DecimalFormat(".#####");
   public final static DecimalFormat df4 = new DecimalFormat(".####");
   public final static DecimalFormat df3 = new DecimalFormat(".###");
@@ -105,7 +104,7 @@ public class Logging {
       this.subsystem = subsystem;
       loggingContexts.add(this);
     }
-    
+
     public LoggingContext(final Class<?> subsystem) {
       this(subsystem.getSimpleName());
     }
@@ -203,7 +202,7 @@ public class Logging {
     }
     traceMessage(sb);
   }
-  
+
   /**
    * Iterate through the known logging contexts and write the data for each of
    * them. Logs one logging context every time it'called. It's called by the
@@ -212,7 +211,7 @@ public class Logging {
    */
   public void writeAllData() {
     for (final LoggingContext lc : loggingContexts) {
-        lc.writeData();
+      lc.writeData();
     }
   }
 
@@ -282,5 +281,4 @@ public class Logging {
       print();
     }
   }
-
 }
