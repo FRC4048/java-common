@@ -7,6 +7,7 @@
 
 package org.usfirst.frc4048.common.smartshuffleboard;
 
+import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -47,7 +48,7 @@ public class SmartShuffleboardTab {
         SimpleWidget widget = widgetMap.get(fieldName);
         if (widget != null)
         {
-            NetworkTableEntry ntEntry= widget.getEntry();
+            GenericEntry ntEntry= widget.getEntry();
             ntEntry.setValue(value);
         }
         else
@@ -70,7 +71,7 @@ public class SmartShuffleboardTab {
         SimpleWidget widget = widgetMap.get(fieldName);
         if (widget != null)
         {
-            NetworkTableEntry ntEntry= widget.getEntry();
+            GenericEntry ntEntry= widget.getEntry();
             ntEntry.setValue(value);
         }
         else
