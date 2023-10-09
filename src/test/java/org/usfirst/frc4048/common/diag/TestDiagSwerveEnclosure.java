@@ -14,7 +14,7 @@ public class TestDiagSwerveEnclosure {
         SparkMAXSwerveEnclosure mockEnclosure = Mockito.mock(SparkMAXSwerveEnclosure.class);
         when(mockEnclosure.getLastEncPosition()).thenReturn(1);
 
-        DiagSwerveEnclosureSparkMAX classUnderTest = new DiagSwerveEnclosureSparkMAX("enclosure", 100, mockEnclosure);
+        DiagSwerveEnclosureSparkMAX classUnderTest = new DiagSwerveEnclosureSparkMAX("Diags","enclosure", 100, mockEnclosure);
 
         when(mockEnclosure.getLastEncPosition()).thenReturn(51);
         Assert.assertFalse(classUnderTest.getDiagResult());
@@ -34,7 +34,7 @@ public class TestDiagSwerveEnclosure {
         SparkMAXSwerveEnclosure mockEnclosure = Mockito.mock(SparkMAXSwerveEnclosure.class);
         when(mockEnclosure.getLastEncPosition()).thenReturn(1);
 
-        DiagSwerveEnclosureSparkMAX classUnderTest = new DiagSwerveEnclosureSparkMAX("enclosure", 100, mockEnclosure);
+        DiagSwerveEnclosureSparkMAX classUnderTest = new DiagSwerveEnclosureSparkMAX("Diags","enclosure", 100, mockEnclosure);
 
         when(mockEnclosure.getLastEncPosition()).thenReturn(101);
         Assert.assertTrue(classUnderTest.getDiagResult());

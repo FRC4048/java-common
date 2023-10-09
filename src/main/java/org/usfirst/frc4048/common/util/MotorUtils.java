@@ -3,7 +3,7 @@ package org.usfirst.frc4048.common.util;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.Timer;
-import frc.robot.utils.logging.Logging;
+import org.usfirst.frc4048.common.logging.Logging;
 
 /*
  *   MotorStall object should be instantiated in init() method of a command

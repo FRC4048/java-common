@@ -7,7 +7,8 @@
 
 package org.usfirst.frc4048.common.diag;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import org.usfirst.frc4048.common.util.ColorSensor;
 
@@ -21,19 +22,21 @@ public class DiagColorSensor implements Diagnosable {
 
     private ColorSensor colorsensor;
     private String name;
-    private NetworkTableEntry networkTableEntry;
+    private String title;
+    private GenericEntry networkTableEntry;
     private Map<ColorSensor.ColorValue, Boolean> colorMap;
 
-    public DiagColorSensor(String name, ColorSensor colorsensor) {
+    public DiagColorSensor(String name, String title, ColorSensor colorsensor) {
         this.name = name;
+        this.title = title;
         this.colorsensor = colorsensor;
         colorMap = new HashMap<ColorSensor.ColorValue, Boolean>();
         reset();
     }
 
     @Override
-    public void setShuffleBoardTab(ShuffleboardTab shuffleBoardTab) {
-        networkTableEntry = shuffleBoardTab.add(name, false).getEntry();
+    public void setShuffleBoardTab(ShuffleboardTab shuffleBoardTab, int width, int height) {
+        networkTableEntry = shuffleBoardTab.getLayout(title, BuiltInLayouts.kList).withSize(width, height).add(name, false).getEntry();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package org.usfirst.frc4048.common.util;
 
+import edu.wpi.first.wpilibj.DigitalOutput;
+
 public class LedPanel {
     public enum PicID {
         ZERO(false,false,false),
