@@ -128,7 +128,7 @@ public class LimeLightVision {
     /**
      * Internal utility to calculate the distances, in inches, from the camera based off of the viewed angles
      */
-    private CameraDistance calcCameraDistance(double angleX, double angleY) {
+    CameraDistance calcCameraDistance(double angleX, double angleY) {
         double forwardDistance = (relativeHeight) / Math.tan(Math.toRadians(cameraAngle + angleY));
         double sidewaysDistance = forwardDistance * Math.tan(Math.toRadians(angleX));
 
