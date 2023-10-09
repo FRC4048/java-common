@@ -7,10 +7,9 @@
 
 package org.usfirst.frc4048.common.smartshuffleboard;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
+import edu.wpi.first.networktables.NetworkTableEntry;
 
 import java.util.*;
 
