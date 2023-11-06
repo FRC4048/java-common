@@ -2,6 +2,8 @@ package org.usfirst.frc4048.common.swervev2.components;
 
 import com.ctre.phoenix.sensors.WPI_CANCoder;
 import com.revrobotics.RelativeEncoder;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 
 public class GenericEncodedSwerve implements SwerveMotor, SwerveMotorEncoder {
@@ -75,5 +77,8 @@ public class GenericEncodedSwerve implements SwerveMotor, SwerveMotorEncoder {
         if (steerOffset < 0) {
             steerOffset += 2 * Math.PI;
         }
+    }
+    public SwerveModulePosition getPosition(){
+        return new SwerveModulePosition(getDriveEncPosition(),new Rotation2d(getSteerEncPosition()));
     }
 }

@@ -14,8 +14,4 @@ public interface SwerveMotorEncoder {
 
     void setSteerOffset(double zeroAbs);
 
-    default SwerveModulePosition getPosition(){
-        return new SwerveModulePosition(getDriveEncPosition(),new Rotation2d(getSteerEncPosition()));
-    }
-
 }
