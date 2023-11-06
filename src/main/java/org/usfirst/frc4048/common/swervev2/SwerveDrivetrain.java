@@ -14,6 +14,7 @@ import org.usfirst.frc4048.common.swervev2.type.SparkMaxSwerveModule;
 import org.usfirst.frc4048.common.util.Gain;
 import org.usfirst.frc4048.common.util.PID;
 
+//TODO change to test
 public class SwerveDrivetrain {
     private final CANSparkMax m_frontLeftDrive;
     private final CANSparkMax m_frontLeftTurn;
@@ -36,9 +37,9 @@ public class SwerveDrivetrain {
         m_frontLeftTurn = new CANSparkMax(0, CANSparkMaxLowLevel.MotorType.kBrushless);
 
         frontLeftCanCoder = new WPI_CANCoder(0);
-        double driveVelConvFactor = (2 * 0) / (0 * 60);
-        double drivePosConvFactor = (2 * 0) / (0);
-        double steerPosConvFactor = (2 * Math.PI / 0);
+        double driveVelConvFactor = 1;
+        double drivePosConvFactor = 1;
+        double steerPosConvFactor = 1;
         EncodedSwerveSparkMax encodedSwerveSparkMax = new EncodedSwerveSparkMax(m_frontLeftDrive, m_frontLeftTurn, frontLeftCanCoder, driveVelConvFactor, drivePosConvFactor, steerPosConvFactor);
         TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(18 * 4, 2 * Math.PI * 10);
         m_frontLeft = new SparkMaxSwerveModule(encodedSwerveSparkMax, PID.of(0,0,0),PID.of(0,0,0), Gain.of(0,0),Gain.of(0,0),constraints);
