@@ -35,9 +35,9 @@ public abstract class GenericAutoChooser {
           else return getDefaultCommand();
      }
 
-     abstract Map<AutoEventComparer, Command> getCommandMap();
-     abstract CommandBase getDefaultCommand();
-     abstract AutoAction getDefaultActionOption();
-     abstract FieldLocation getDefaultLocationOption();
+     protected abstract Map<AutoEventComparer, Command> getCommandMap();
+     protected abstract CommandBase getDefaultCommand();
+     protected abstract AutoAction getDefaultActionOption();
+     protected abstract FieldLocation getDefaultLocationOption();
 
 }

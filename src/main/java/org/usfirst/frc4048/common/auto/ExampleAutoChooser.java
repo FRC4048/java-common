@@ -8,23 +8,23 @@ import java.util.Map;
 public class ExampleAutoChooser extends GenericAutoChooser{
 
      @Override
-     Map<AutoEventComparer, Command> getCommandMap() {
+     protected Map<AutoEventComparer, Command> getCommandMap() {
           return Map.of(AutoEventComparer.fromAction(AutoAction.DoNothing), new PlaceHolderCommand(),
                   AutoEventComparer.fromActionAndLocation(AutoAction.TwoPieceMoveLeft, FieldLocation.Middle), new PlaceHolderCommand());
      }
 
      @Override
-     CommandBase getDefaultCommand() {
+     protected CommandBase getDefaultCommand() {
           return new PlaceHolderCommand();
      }
 
      @Override
-     AutoAction getDefaultActionOption() {
+     protected AutoAction getDefaultActionOption() {
           return AutoAction.DoNothing;
      }
 
      @Override
-     FieldLocation getDefaultLocationOption() {
+     protected FieldLocation getDefaultLocationOption() {
           return FieldLocation.Middle;
      }
 
