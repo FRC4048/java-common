@@ -11,9 +11,12 @@ import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import org.usfirst.frc4048.common.util.ColorSensor;
+import org.usfirst.frc4048.common.util.ColorValue;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Add your docs here.
@@ -24,13 +27,13 @@ public class DiagColorSensor implements Diagnosable {
     private String name;
     private String title;
     private GenericEntry networkTableEntry;
-    private Map<ColorSensor.ColorValue, Boolean> colorMap;
+    private Map<ColorValue, Boolean> colorMap;
 
     public DiagColorSensor(String name, String title, ColorSensor colorsensor) {
         this.name = name;
         this.title = title;
         this.colorsensor = colorsensor;
-        colorMap = new HashMap<ColorSensor.ColorValue, Boolean>();
+        colorMap = new HashMap<>(Arrays.stream(ColorValue.values()).map(colorValue -> new HashMap.SimpleEntry<>(colorValue, false)).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
         reset();
     }
 
@@ -41,11 +44,9 @@ public class DiagColorSensor implements Diagnosable {
 
     @Override
     public void refresh() {
-        ColorSensor.ColorValue colorValue = colorsensor.getColor();
+        ColorValue colorValue = colorsensor.getColor();
         colorMap.put(colorValue, true);
-        boolean allColors = colorMap.get(ColorSensor.ColorValue.RED) && colorMap.get(ColorSensor.ColorValue.BLUE)
-                            && colorMap.get(ColorSensor.ColorValue.GREEN) && colorMap.get(ColorSensor.ColorValue.YELLOW)
-                            && colorMap.get(ColorSensor.ColorValue.UNKNOWN);
+        boolean allColors = colorMap.values().stream().allMatch(value -> value);
         if (networkTableEntry != null) {
             networkTableEntry.setBoolean(allColors);
         }
@@ -53,10 +54,6 @@ public class DiagColorSensor implements Diagnosable {
 
     @Override
     public void reset() {
-        colorMap.put(ColorSensor.ColorValue.RED, false);
-        colorMap.put(ColorSensor.ColorValue.GREEN, false);
-        colorMap.put(ColorSensor.ColorValue.BLUE, false);
-        colorMap.put(ColorSensor.ColorValue.YELLOW, false);
-        colorMap.put(ColorSensor.ColorValue.UNKNOWN, false);
+        colorMap = new HashMap<>(Arrays.stream(ColorValue.values()).map(colorValue -> new HashMap.SimpleEntry<>(colorValue, false)).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
     }
 }
