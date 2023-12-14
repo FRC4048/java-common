@@ -9,8 +9,10 @@ public class ExampleAutoChooser extends GenericAutoChooser{
 
      @Override
      protected Map<AutoEventComparer, Command> getCommandMap() {
-          return Map.of(AutoEventComparer.fromAction(AutoAction.DoNothing), new PlaceHolderCommand(),
-                  AutoEventComparer.fromActionAndLocation(AutoAction.TwoPieceMoveLeft, FieldLocation.Middle), new PlaceHolderCommand());
+          return Map.of(
+                  AutoEventComparer.fromAction(AutoAction.DoNothing), new PlaceHolderCommand(),
+                  AutoEventComparer.fromActionAndLocation(AutoAction.TwoPieceMoveLeft, FieldLocation.Middle), new PlaceHolderCommand()
+          );
      }
 
      @Override

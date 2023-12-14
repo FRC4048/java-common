@@ -49,8 +49,12 @@ public class AutoEventComparer {
     public boolean isAutoEventValid(AutoEvent event){
         return includedActions.contains(event.getAction()) && includedLocations.contains(event.getLocation());
     }
-    
-    
-    
-    
+
+    public List<AutoAction> getIncludedActions() {
+        return List.copyOf(includedActions);
+    }
+
+    public List<FieldLocation> getIncludedLocations() {
+        return List.copyOf(includedLocations);
+    }
 }
