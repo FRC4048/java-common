@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.*;
 
 import java.util.Set;
 import java.util.function.BooleanSupplier;
-
+//Why is CommandBase abstract if it has not abstract methods????
 public class PlaceHolderCommand extends CommandBase{
 
 }
