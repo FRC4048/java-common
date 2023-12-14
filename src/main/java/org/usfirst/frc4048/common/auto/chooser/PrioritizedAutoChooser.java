@@ -1,6 +1,10 @@
-package org.usfirst.frc4048.common.auto;
+package org.usfirst.frc4048.common.auto.chooser;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import org.usfirst.frc4048.common.auto.AutoAction;
+import org.usfirst.frc4048.common.auto.FieldLocation;
+import org.usfirst.frc4048.common.auto.event.AutoEvent;
+import org.usfirst.frc4048.common.auto.event.AutoEventComparer;
 
 import java.util.List;
 import java.util.Optional;

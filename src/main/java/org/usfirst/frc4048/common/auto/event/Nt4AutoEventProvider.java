@@ -1,6 +1,8 @@
-package org.usfirst.frc4048.common.auto;
+package org.usfirst.frc4048.common.auto.event;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import org.usfirst.frc4048.common.auto.AutoAction;
+import org.usfirst.frc4048.common.auto.FieldLocation;
 
 import java.util.Arrays;
 

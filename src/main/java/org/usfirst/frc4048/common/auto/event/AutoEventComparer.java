@@ -1,4 +1,7 @@
-package org.usfirst.frc4048.common.auto;
+package org.usfirst.frc4048.common.auto.event;
+
+import org.usfirst.frc4048.common.auto.AutoAction;
+import org.usfirst.frc4048.common.auto.FieldLocation;
 
 import java.util.Arrays;
 import java.util.List;
