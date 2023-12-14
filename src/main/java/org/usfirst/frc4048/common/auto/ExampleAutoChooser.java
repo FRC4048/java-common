@@ -5,10 +5,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import java.util.Map;
 
-public class ExampleAutoChooser extends GenericAutoChooser{
+public class ExampleAutoChooser extends PrioritizedAutoChooser {
 
      @Override
-     protected Map<AutoEventComparer, Command> getCommandMap() {
+     public Map<AutoEventComparer, Command> getCommandMap() {
           return Map.of(
                   AutoEventComparer.fromAction(AutoAction.DoNothing), new PlaceHolderCommand(),
                   AutoEventComparer.fromActionAndLocation(AutoAction.TwoPieceMoveLeft, FieldLocation.Middle), new PlaceHolderCommand()
@@ -16,18 +16,13 @@ public class ExampleAutoChooser extends GenericAutoChooser{
      }
 
      @Override
-     protected CommandBase getDefaultCommand() {
+     public CommandBase getDefaultCommand() {
           return new PlaceHolderCommand();
      }
 
      @Override
-     protected AutoAction getDefaultActionOption() {
-          return AutoAction.DoNothing;
-     }
-
-     @Override
-     protected FieldLocation getDefaultLocationOption() {
-          return FieldLocation.Middle;
+     public AutoEventProvider getAutoEventProvider() {
+          return null;
      }
 
 }
