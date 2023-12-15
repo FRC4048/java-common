@@ -7,6 +7,7 @@ import org.usfirst.frc4048.common.auto.FieldLocation;
 import org.usfirst.frc4048.common.auto.PlaceHolderCommand;
 import org.usfirst.frc4048.common.auto.event.AutoEventComparer;
 import org.usfirst.frc4048.common.auto.event.AutoEventProvider;
+import org.usfirst.frc4048.common.auto.event.Nt4AutoEventProvider;
 
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public class ExampleAutoChooser extends PrioritizedAutoChooser {
 
      @Override
      public AutoEventProvider getAutoEventProvider() {
-          return null;
+          return new Nt4AutoEventProvider(AutoAction.DoNothing,FieldLocation.Middle);
      }
 
 }
