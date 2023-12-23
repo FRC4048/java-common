@@ -1,24 +1,21 @@
 package org.usfirst.frc4048.common.logginv2;
 
-import edu.wpi.first.util.sendable.SendableRegistry;
-import edu.wpi.first.wpilibj2.command.CommandGroupBase;
+
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 
 @Aspect
 public class Logger {
     //command Groups
 
-    @Before("execution(* edu.wpi.first.wpilibj2.command.CommandGroupBase+.initialize(..))")
+    @After("execution(* edu.wpi.first.wpilibj2.command.CommandGroupBase+.initialize(..))")
     public void logCommandGroupInit(JoinPoint joinPoint){
-        System.out.println("INIT");
+        System.out.println("Command Group is starting");
     }
-    @Before("execution(* edu.wpi.first.wpilibj2.command.CommandGroupBase+.end(..))")
+    @After("execution(* edu.wpi.first.wpilibj2.command.CommandGroupBase+.end(..))")
     public void logCommandGroupEnd(JoinPoint joinPoint){
-        System.out.println("END");
+        System.out.println("Command Group is ending");
     }
 
     //commands

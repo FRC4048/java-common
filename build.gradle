@@ -1,6 +1,7 @@
 plugins {
     id "java"
     id "edu.wpi.first.GradleRIO" version "2023.4.3"
+    id "io.freefair.aspectj.base" version "8.4"
     id("io.freefair.aspectj.post-compile-weaving") version "8.4"
 }
 
@@ -52,6 +53,7 @@ dependencies {
     implementation wpi.java.deps.wpilib()
     implementation wpi.java.vendor.java()
     implementation 'org.aspectj:aspectjrt:1.9.21'
+    implementation 'org.aspectj:aspectjweaver:1.9.21'
     testImplementation 'junit:junit:4.13.1'
 
     roborioDebug wpi.java.deps.wpilibJniDebug(wpi.platforms.roborio)
