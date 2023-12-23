@@ -17,7 +17,7 @@ public class LoggingTest {
     public void testCommandGroupLogging(){
         ParallelRaceGroup race = new ParallelRaceGroup();
         race.initialize();
-        assertEquals("Command Group is starting",testStream.toString());
+        assertEquals("Command Group is starting\r\n",testStream.toString());
     }
     @BeforeEach
     public void setTestStream(){
