@@ -6,7 +6,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
-public class packageLogger {
+public class Logger {
     @Pointcut("within( @org.usfirst.frc4048.common.logginv2.LoggedCommand org.usfirst.frc4048.common.logginv2.commands..*)")
     public void validCommand(){}
 
