@@ -55,6 +55,7 @@ dependencies {
     implementation 'org.aspectj:aspectjrt:1.9.21'
     implementation 'org.aspectj:aspectjweaver:1.9.21'
     testImplementation 'junit:junit:4.13.1'
+    inpath 'edu.wpi.first.wpilibNewCommands:wpilibNewCommands-java:2023.4.3'
 
     roborioDebug wpi.java.deps.wpilibJniDebug(wpi.platforms.roborio)
     roborioDebug wpi.java.vendor.jniDebug(wpi.platforms.roborio)
@@ -105,3 +106,12 @@ wpi.java.configureTestTasks(test)
 tasks.withType(JavaCompile) {
     options.compilerArgs.add '-XDstringConcat=inline'
 }
+//NOT SURE IF NEEDED
+tasks.named("compileJava").configure {
+    ajc {
+        options {
+            compilerArgs += "-showWeaveInfo"
+        }
+    }
+}
+compileTestJava.ajc.options.aspectpath.from sourceSets.main.output
