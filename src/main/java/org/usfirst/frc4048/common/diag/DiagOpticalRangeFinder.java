@@ -20,8 +20,8 @@ public class DiagOpticalRangeFinder extends DiagMinMax {
      * @param minDistance             -The minimum testing distance for the optical range finder; the one that will be tested against.
      * @param maxDistance             -The maximum testing distance for the optical range finder; the one that will be tested against.
      */
-    public DiagOpticalRangeFinder(String name, OpticalRangeFinder opticalRangeFinder, double minDistance, double maxDistance){
-        super(name, minDistance, maxDistance);
+    public DiagOpticalRangeFinder(String tittle, String name, OpticalRangeFinder opticalRangeFinder, double minDistance, double maxDistance){
+        super(tittle,name, minDistance, maxDistance);
         this.opticalRangeFinder = opticalRangeFinder;
     }
 

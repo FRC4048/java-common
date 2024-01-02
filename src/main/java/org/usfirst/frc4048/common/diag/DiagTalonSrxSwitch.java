@@ -7,37 +7,26 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
  * it is a DiagBoolean subclass.
  */
 public class DiagTalonSrxSwitch extends DiagBoolean {
-    public DiagTalonSrxSwitch(String name) {
-        super(name);
+    public DiagTalonSrxSwitch(String title, String name) {
+        super(title, name);
     }
 
-    @Override
-    protected boolean getValue() {
-        return false;
-    }
-
-    /***
-     * The following code is commented out since the WPI_TalonSRX has a build issue (It is using
-     * Sendable from the wrong package).
-     *
-
-     public enum Direction {FORWARD, REVERSE};
-
+    public enum Direction {FORWARD, REVERSE};
     private WPI_TalonSRX talonSRX;
     private Direction direction;
 
-    / **
+    /*
      * Constructor
      *
-     * @param name      the name of the unit. Will be used on the Shuffleboard
-     * @param talonSRX  the talon SRX to read the switch value from
-     * /
-    public DiagTalonSrxSwitch(String name, WPI_TalonSRX talonSRX, Direction direction) {
-        super(name);
+     * @param name      -the name of the unit. Will be used on the Shuffleboard
+     * @param talonSRX  -the talon SRX to read the switch value from
+     */
+
+    public DiagTalonSrxSwitch(String title, String name, WPI_TalonSRX talonSRX, Direction direction) {
+        super(title, name);
         this.talonSRX = talonSRX;
         this.direction = direction;
     }
-
     @Override
     protected boolean getValue() {
         switch (direction) {
@@ -49,5 +38,5 @@ public class DiagTalonSrxSwitch extends DiagBoolean {
                 return false;
         }
     }
-    ***/
+
 }
