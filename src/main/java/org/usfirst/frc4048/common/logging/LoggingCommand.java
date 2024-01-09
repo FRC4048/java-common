@@ -73,6 +73,11 @@ public abstract class LoggingCommand extends Command {
         underlying.setSubsystem(subsystem);
     }
 
+    @Override
+    public boolean runsWhenDisabled() {
+        return underlying.runsWhenDisabled();
+    }
+
     public String getNamePrefix() {
         return namePrefix;
     }
