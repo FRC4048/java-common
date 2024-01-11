@@ -21,6 +21,9 @@ import frc.robot.swervev2.type.SparkMaxSwerveModule;
 
 
 public class SwerveDrivetrain extends SubsystemBase {
+
+    private static final double MODULE_MAX_ANGULAR_ACCELERATION = 2 * Math.PI; // radians per second squared
+
     private final CANSparkMax frontLeftDrive;
     private final CANSparkMax frontLeftTurn;
     private final CANSparkMax backLeftDrive;
@@ -51,34 +54,40 @@ public class SwerveDrivetrain extends SubsystemBase {
     private final AHRS navxGyro;
     private double navxGyroValue;
     private float filterRoll = 0;
+
     
 
     private double getGyro() {
         return (navxGyro.getAngle() % 360)*-1; //ccw should be positive
     }
 
-    public SwerveDrivetrain() {
+    public SwerveDrivetrain(SwerveIdConfig frontLeftConfig, SwerveIdConfig frontRightConfig, SwerveIdConfig backLeftConfig, SwerveIdConfig backRightConfig) {
         navxGyro = new AHRS();
         navxGyroValue = -1;
 
-        frontLeftDrive = new CANSparkMax(Constants.DRIVE_FRONT_LEFT_D, CANSparkMaxLowLevel.MotorType.kBrushless);
-        frontLeftTurn = new CANSparkMax(Constants.DRIVE_FRONT_LEFT_S, CANSparkMaxLowLevel.MotorType.kBrushless);
-        backLeftDrive = new CANSparkMax(Constants.DRIVE_BACK_LEFT_D, CANSparkMaxLowLevel.MotorType.kBrushless);
-        backLeftTurn = new CANSparkMax(Constants.DRIVE_BACK_LEFT_S, CANSparkMaxLowLevel.MotorType.kBrushless);
+        frontLeftDrive = new CANSparkMax(frontLeftConfig.getDriveMotorId(), CANSparkMaxLowLevel.MotorType.kBrushless);
+        frontLeftTurn = new CANSparkMax(frontLeftConfig.getTurnMotorId(), CANSparkMaxLowLevel.MotorType.kBrushless);
+        backLeftDrive = new CANSparkMax(backLeftConfig.getDriveMotorId(), CANSparkMaxLowLevel.MotorType.kBrushless);
+        backLeftTurn = new CANSparkMax(backLeftConfig.getTurnMotorId(), CANSparkMaxLowLevel.MotorType.kBrushless);
         
-        frontRightDrive = new CANSparkMax(Constants.DRIVE_FRONT_RIGHT_D, CANSparkMaxLowLevel.MotorType.kBrushless);
-        frontRightTurn = new CANSparkMax(Constants.DRIVE_FRONT_RIGHT_S, CANSparkMaxLowLevel.MotorType.kBrushless);
-        backRightDrive = new CANSparkMax(Constants.DRIVE_BACK_RIGHT_D, CANSparkMaxLowLevel.MotorType.kBrushless);
-        backRightTurn = new CANSparkMax(Constants.DRIVE_BACK_RIGHT_S, CANSparkMaxLowLevel.MotorType.kBrushless);
+        frontRightDrive = new CANSparkMax(frontRightConfig.getDriveMotorId(), CANSparkMaxLowLevel.MotorType.kBrushless);
+        frontRightTurn = new CANSparkMax(frontRightConfig.getTurnMotorId(), CANSparkMaxLowLevel.MotorType.kBrushless);
+        backRightDrive = new CANSparkMax(backRightConfig.getDriveMotorId(), CANSparkMaxLowLevel.MotorType.kBrushless);
+        backRightTurn = new CANSparkMax(backRightConfig.getTurnMotorId(), CANSparkMaxLowLevel.MotorType.kBrushless);
 
-        frontLeftCanCoder = new WPI_CANCoder(Constants.DRIVE_CANCODER_FRONT_LEFT);
-        backLeftCanCoder = new WPI_CANCoder(Constants.DRIVE_CANCODER_BACK_LEFT);
-        frontRightCanCoder = new WPI_CANCoder(Constants.DRIVE_CANCODER_FRONT_RIGHT);
-        backRightCanCoder = new WPI_CANCoder(Constants.DRIVE_CANCODER_BACK_RIGHT);
+        frontLeftCanCoder = new WPI_CANCoder(frontLeftConfig.getCanCoderId());
+        backLeftCanCoder = new WPI_CANCoder(backLeftConfig.getCanCoderId());
+        frontRightCanCoder = new WPI_CANCoder(frontRightConfig.getCanCoderId());
+        backRightCanCoder = new WPI_CANCoder(backRightConfig.getCanCoderId());
         double driveVelConvFactor = (2 * Constants.WHEEL_RADIUS * Math.PI) / (Constants.CHASSIS_DRIVE_GEAR_RATIO * 60);
         double drivePosConvFactor = (2 * Constants.WHEEL_RADIUS * Math.PI) / (Constants.CHASSIS_DRIVE_GEAR_RATIO);
         double steerPosConvFactor = 2 * Math.PI / Constants.CHASSIS_STEER_GEAR_RATIO;
-        
+
+        frontLeftDrive.setInverted(true);
+        frontRightDrive.setInverted(false);
+        backRightDrive.setInverted(false);
+        backLeftDrive.setInverted(true);
+
         EncodedSwerveSparkMax encodedSwerveSparkMaxFL = new EncodedSwerveSparkMax(frontLeftDrive, frontLeftTurn, frontLeftCanCoder, driveVelConvFactor, drivePosConvFactor, steerPosConvFactor);
         EncodedSwerveSparkMax encodedSwerveSparkMaxFR = new EncodedSwerveSparkMax(frontRightDrive, frontRightTurn, frontRightCanCoder, driveVelConvFactor, drivePosConvFactor, steerPosConvFactor);
         EncodedSwerveSparkMax encodedSwerveSparkMaxBL = new EncodedSwerveSparkMax(backLeftDrive, backLeftTurn, backLeftCanCoder, driveVelConvFactor, drivePosConvFactor, steerPosConvFactor);
@@ -92,10 +101,7 @@ public class SwerveDrivetrain extends SubsystemBase {
         frontRight = new SparkMaxSwerveModule(encodedSwerveSparkMaxFR, drivePid,steerPid, driveGain,steerGain,constraints);
         backLeft = new SparkMaxSwerveModule(encodedSwerveSparkMaxBL, drivePid,steerPid, driveGain,steerGain,constraints);
         backRight = new SparkMaxSwerveModule(encodedSwerveSparkMaxBR, drivePid,steerPid, driveGain,steerGain,constraints);
-        frontLeftDrive.setInverted(true);
-        frontRightDrive.setInverted(false);
-        backRightDrive.setInverted(false);
-        backLeftDrive.setInverted(true);
+
         navxGyro.setAngleAdjustment(gyroOffset);
     }
 
@@ -107,8 +113,7 @@ public class SwerveDrivetrain extends SubsystemBase {
         return navxGyro.getRoll();
     }
     
-    private static final double MODULE_MAX_ANGULAR_ACCELERATION =
-            2 * Math.PI; // radians per second squared
+
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
         SwerveModuleState[] swerveModuleStates = kinematics.toSwerveModuleStates(
                 fieldRelative
@@ -117,15 +122,8 @@ public class SwerveDrivetrain extends SubsystemBase {
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.MAX_VELOCITY);
         setModuleStates(swerveModuleStates);
     }
-    public void driveRaw(double speed){
-        SwerveModuleState swerveModuleState = new SwerveModuleState(speed, new Rotation2d(0));
-        frontLeft.setDesiredState(swerveModuleState);
-        frontRight.setDesiredState(swerveModuleState);
-        backLeft.setDesiredState(swerveModuleState);
-        backRight.setDesiredState(swerveModuleState);
-    }
 
-    public void setModuleStates(SwerveModuleState[] desiredStates) {
+    private void setModuleStates(SwerveModuleState[] desiredStates) {
         frontLeft.setDesiredState(desiredStates[0]);
         frontRight.setDesiredState(desiredStates[1]);
         backLeft.setDesiredState(desiredStates[2]);
@@ -133,22 +131,21 @@ public class SwerveDrivetrain extends SubsystemBase {
     }
     
     public void stopMotor() {
-        frontLeftTurn.set(0.0);
-        frontLeftDrive.set(0.0);
-        frontRightTurn.set(0.0);
-        frontRightDrive.set(0.0);
-        backLeftTurn.set(0.0);
-        backLeftDrive.set(0.0);
-        backRightTurn.set(0.0);
-        backRightDrive.set(0.0);
+        frontLeft.getSwerveMotor().getSteerMotor().set(0.0);
+        frontLeft.getSwerveMotor().getDriveMotor().set(0.0);
+        frontRight.getSwerveMotor().getSteerMotor().set(0.0);
+        frontRight.getSwerveMotor().getDriveMotor().set(0.0);
+        backLeft.getSwerveMotor().getSteerMotor().set(0.0);
+        backLeft.getSwerveMotor().getDriveMotor().set(0.0);
+        backRight.getSwerveMotor().getSteerMotor().set(0.0);
+        backRight.getSwerveMotor().getDriveMotor().set(0.0);
     }
 
-    public void SetRelEncZero(){
+    public void zeroRelativeEncoders(){
         frontLeft.getSwerveMotor().resetRelEnc();
-    }
-
-    public double getRelEnc(){
-        return frontLeft.getSwerveMotor().getDriveEncPosition();
+        frontRight.getSwerveMotor().resetRelEnc();
+        backLeft.getSwerveMotor().resetRelEnc();
+        backRight.getSwerveMotor().resetRelEnc();
     }
 
     public SparkMaxSwerveModule getFrontLeft() {
