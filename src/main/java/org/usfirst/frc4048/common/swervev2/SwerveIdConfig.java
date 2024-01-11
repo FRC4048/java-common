@@ -1,4 +1,4 @@
-package org.usfirst.frc4048.common.swervev2;
+package frc.robot.swervev2;
 
 public class SwerveIdConfig {
     private final int driveMotorId;
@@ -9,9 +9,6 @@ public class SwerveIdConfig {
         this.driveMotorId = driveMotorId;
         this.turnMotorId = turnMotorId;
         this.canCoderId = canCoderId;
-    }
-    public static SwerveIdConfig of(int driveMotorId, int turnMotorId, int canCoderId) {
-        return new SwerveIdConfig(driveMotorId, turnMotorId, canCoderId);
     }
 
     public int getDriveMotorId() {
