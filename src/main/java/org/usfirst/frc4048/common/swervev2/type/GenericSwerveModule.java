@@ -1,4 +1,4 @@
-package org.usfirst.frc4048.common.swervev2.type;
+package frc.robot.swervev2.type;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -6,11 +6,11 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import org.usfirst.frc4048.common.swervev2.components.GenericEncodedSwerve;
-import org.usfirst.frc4048.common.util.Gain;
-import org.usfirst.frc4048.common.util.PID;
+import frc.robot.swervev2.Gain;
+import frc.robot.swervev2.PID;
+import frc.robot.swervev2.components.GenericEncodedSwerve;
 
-public class GenericSwerveModule implements StatedSwerve, PidSwerve {
+public class GenericSwerveModule implements StatedSwerve {
     private final PIDController drivePIDController;
     private final ProfiledPIDController turningPIDController;
     private final SimpleMotorFeedforward driveFeedforward;
@@ -40,23 +40,20 @@ public class GenericSwerveModule implements StatedSwerve, PidSwerve {
         swerveMotor.getSteerMotor().set(turnSpeed);
     }
 
-    @Override
-    public double calcDrivePidOut(double setpoint) {
+    
+    private double calcDrivePidOut(double setpoint) {
         return drivePIDController.calculate(swerveMotor.getDriveEncVel(), setpoint);
     }
-
-    @Override
-    public double calcSteerPidOut(double goal) {
+    
+    private double calcSteerPidOut(double goal) {
         return turningPIDController.calculate(swerveMotor.getSteerEncPosition(), goal);
     }
-
-    @Override
-    public double calcDriveFeedForward(double velocity) {
+    
+    private double calcDriveFeedForward(double velocity) {
         return driveFeedforward.calculate(velocity);
     }
-
-    @Override
-    public double calcSteerFeedForward() {
+    
+    private double calcSteerFeedForward() {
         return turnFeedforward.calculate(turningPIDController.getSetpoint().velocity);
     }
     public GenericEncodedSwerve getSwerveMotor(){
