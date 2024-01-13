@@ -1,4 +1,4 @@
-package org.usfirst.frc4048.common.auto.event;
+package frc.robot.auto.event;
 
 
 import frc.robot.auto.AutoAction;
