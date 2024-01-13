@@ -6,13 +6,13 @@ import org.usfirst.frc4048.common.swerve.drive.SparkMAXSwerveEnclosure;
 public class DiagSwerveEnclosureSparkMAX extends DiagDistanceTraveled {
     private SparkMAXSwerveEnclosure enclosure;
 
-    public DiagSwerveEnclosureSparkMAX(String name, int requiredTravel, SparkMAXSwerveEnclosure enclosure) {
-        super(name, requiredTravel);
+    public DiagSwerveEnclosureSparkMAX(String title,String name, int requiredTravel, SparkMAXSwerveEnclosure enclosure) {
+        super(title,name, requiredTravel);
         this.enclosure = enclosure;
     }
 
     @Override
-    protected int getCurrentValue() {
+    protected double getCurrentValue() {
         return enclosure.getLastEncPosition();
     }
 }

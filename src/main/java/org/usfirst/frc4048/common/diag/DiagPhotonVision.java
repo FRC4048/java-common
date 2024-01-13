@@ -8,28 +8,23 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
  * Base class for Diagnosable that have an initial value (their "current" value) and that are required to change their
  * value by a certain amount from that
  */
-public abstract class DiagDistanceTraveled implements Diagnosable {
+public abstract class DiagPhotonVision implements Diagnosable {
 
-    protected String name;
-    protected String title;
-    protected double requiredTravel;
+    private final String name;
+    private final String title;
+    private int firstTagId;
+    private double firstTimestamp;
     protected GenericEntry networkTableEntry;
-    private double initialValue;
-    private boolean traveledDistance;
 
-
-    public DiagDistanceTraveled(String title, String name, double requiredTravel) {
+    public DiagPhotonVision(String title, String name) {
         this.title = title;
         this.name = name;
-        this.requiredTravel = requiredTravel;
     }
 
     @Override
     public void setShuffleBoardTab(ShuffleboardTab shuffleBoardTab, int width, int height) {
         networkTableEntry = shuffleBoardTab.getLayout(title, BuiltInLayouts.kList).withSize(width, height).add(name, false).getEntry(); //getLayout(title, BuiltInLayouts.kList)
     }
-
-    
 
     @Override
     public void refresh() {
@@ -40,19 +35,20 @@ public abstract class DiagDistanceTraveled implements Diagnosable {
 
     @Override
     public void reset() {
-        traveledDistance = false;
-        initialValue = getCurrentValue();
+        firstTagId = -1;
+        firstTimestamp = -1;
     }
 
     boolean getDiagResult() {
-        double currentValue = getCurrentValue();
-
-        if (Math.abs(currentValue - initialValue) >= requiredTravel) {
-            traveledDistance = true;
+        if (firstTagId == -1 || firstTimestamp == -1){
+            firstTimestamp = getTagTimestamp();
+            firstTagId = getTagId();
+        } else {
+            return getTagTimestamp() != firstTimestamp;
         }
-
-        return this.traveledDistance;
+        return false;
     }
 
-    protected abstract double getCurrentValue();
+    protected abstract int getTagId();
+    protected abstract double getTagTimestamp();
 }
