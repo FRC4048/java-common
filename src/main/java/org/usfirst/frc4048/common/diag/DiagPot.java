@@ -3,7 +3,7 @@ package org.usfirst.frc4048.common.diag;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 
 /**
- * A diagnostics class for analog potentiometer. It is a DiagMinMax object. 
+ * A diagnostics class for analog potentiometer. It is a DiagMinMax object.
  * Give it the maximum and minimum voltages for testing with.
  */
 public class DiagPot extends DiagMinMax {
@@ -20,8 +20,8 @@ public class DiagPot extends DiagMinMax {
      * @param maxVoltage      - the maximum value the pot needs to hit to qualify for success
      * @param pot             - the pot instance to test
      */
-    public DiagPot(String name, double minVoltage, double maxVoltage, AnalogPotentiometer pot) {
-        super(name, minVoltage, maxVoltage);
+    public DiagPot(String title, String name, double minVoltage, double maxVoltage, AnalogPotentiometer pot) {
+        super(title, name, minVoltage, maxVoltage);
         this.pot = pot;
     }
 

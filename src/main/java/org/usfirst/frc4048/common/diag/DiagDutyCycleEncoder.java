@@ -1,30 +1,30 @@
 package org.usfirst.frc4048.common.diag;
 
-import com.revrobotics.CANSparkMax;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 
 /**
  * A diagnostics class for digital encoder. The diagnostics will turn green once the encoder has traveled at least a given
  * distance from its initial position (measured at initialization or after a reset)
  */
-public class DiagSparkMaxEncoder extends DiagDistanceTraveled {
+public class DiagDutyCycleEncoder extends DiagDistanceTraveled {
 
-    private CANSparkMax canSparkMax;
+    private DutyCycleEncoder encoder;
 
     /**
      * Constructor
      *
      * @param name            - the name of the unit. Will be used on the Shuffleboard
      * @param requiredTravel  - the required difference between the initial position to qualify for success
-     * @param canSparkMax     - the encoder instance to test
+     * @param encoder         - the encoder instance to test
      */
-    public DiagSparkMaxEncoder(String title, String name, double requiredTravel, CANSparkMax canSparkMax) {
+    public DiagDutyCycleEncoder(String title, String name, double requiredTravel, DutyCycleEncoder encoder) {
         super(title, name, requiredTravel);
-        this.canSparkMax = canSparkMax;
+        this.encoder = encoder;
         reset();
     }
 
     @Override
     protected double getCurrentValue() {
-        return canSparkMax.getEncoder().getPosition();
+        return encoder.get();
     }
 }

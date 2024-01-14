@@ -1,14 +1,14 @@
 package org.usfirst.frc4048.common.diag;
 
-import edu.wpi.first.wpilibj.Ultrasonic;
+import com.revrobotics.Rev2mDistanceSensor;
 
 /**
  * Diagnostics class for the Sonar. It is a DiagMinMax object.
  * Give it a max and minimum distance to test.
  */
-public class DiagSonar extends DiagMinMax {
+public class DiagToFSensor extends DiagMinMax {
 
-    private Ultrasonic sonar;
+    private Rev2mDistanceSensor sensor;
 
     /**
      * Constructor
@@ -18,13 +18,13 @@ public class DiagSonar extends DiagMinMax {
      * @param minDistance             -The minimum testing distance for the sonar; the one that will be tested against.
      * @param maxDistance             -The maximum testing distance for the sonar; the one that will be tested against.
      */
-    public DiagSonar(String title, String name, Ultrasonic sonar, double minDistance, double maxDistance){
+    public DiagToFSensor(String title, String name, Rev2mDistanceSensor sensor, double minDistance, double maxDistance){
         super(title, name, minDistance, maxDistance);
-        this.sonar = sonar;
+        this.sensor = sensor;
     }
 
     @Override
     double getSensorReading() {
-        return sonar.getRangeInches();
+        return sensor.getRange();
     }
 }
