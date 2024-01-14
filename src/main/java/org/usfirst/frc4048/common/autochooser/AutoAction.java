@@ -1,8 +1,7 @@
-package org.usfirst.frc4048.common.auto;
+package org.usfirst.frc4048.common.autochooser;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
-import java.io.InvalidObjectException;
 import java.security.InvalidParameterException;
 
 public enum AutoAction {

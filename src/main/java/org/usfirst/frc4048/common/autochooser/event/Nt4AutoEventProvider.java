@@ -1,10 +1,10 @@
-package frc.robot.auto.event;
+package org.usfirst.frc4048.common.autochooser.event;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.auto.AutoAction;
-import frc.robot.auto.FieldLocation;
+import org.usfirst.frc4048.common.autochooser.AutoAction;
+import org.usfirst.frc4048.common.autochooser.FieldLocation;
 
 import java.util.Arrays;
 
