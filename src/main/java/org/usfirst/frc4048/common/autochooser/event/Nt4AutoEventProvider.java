@@ -1,8 +1,10 @@
-package org.usfirst.frc4048.common.auto.event;
+package frc.robot.auto.event;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import org.usfirst.frc4048.common.auto.AutoAction;
-import org.usfirst.frc4048.common.auto.FieldLocation;
+import frc.robot.auto.AutoAction;
+import frc.robot.auto.FieldLocation;
 
 import java.util.Arrays;
 
@@ -23,6 +25,10 @@ public class Nt4AutoEventProvider implements AutoEventProvider {
         Arrays.stream(FieldLocation.values()).forEach(l -> locationChooser.addOption(l.name(), l));
         actionChooser.setDefaultOption(getDefaultActionOption().getName(), getDefaultActionOption());
         locationChooser.setDefaultOption(getDefaultLocationOption().name(), getDefaultLocationOption());
+        ShuffleboardTab autoTab = Shuffleboard.getTab("Auto");
+        autoTab.add("Auto Action",actionChooser).withPosition(0,0).withSize(4,1);
+        autoTab.add("Location Chooser",locationChooser).withPosition(0,1).withSize(4,1);;
+
     }
     public AutoAction getSelectedAction() {
         return actionChooser.getSelected() == null ? getDefaultActionOption() : actionChooser.getSelected();

@@ -1,7 +1,8 @@
-package org.usfirst.frc4048.common.auto.event;
+package frc.robot.auto.event;
 
-import org.usfirst.frc4048.common.auto.AutoAction;
-import org.usfirst.frc4048.common.auto.FieldLocation;
+
+import frc.robot.auto.AutoAction;
+import frc.robot.auto.FieldLocation;
 
 public interface AutoEventProvider {
     AutoAction getSelectedAction();
