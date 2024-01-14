@@ -33,7 +33,6 @@ public class DiagColorSensor implements Diagnosable {
         this.name = name;
         this.title = title;
         this.colorsensor = colorsensor;
-        colorMap = new HashMap<>(Arrays.stream(ColorValue.values()).map(colorValue -> new HashMap.SimpleEntry<>(colorValue, false)).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
         reset();
     }
 
@@ -54,6 +53,6 @@ public class DiagColorSensor implements Diagnosable {
 
     @Override
     public void reset() {
-        colorMap = new HashMap<>(Arrays.stream(ColorValue.values()).map(colorValue -> new HashMap.SimpleEntry<>(colorValue, false)).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+        colorMap = Arrays.stream(ColorValue.values()).collect(Collectors.toMap(colorValue -> colorValue, colorValue -> false));
     }
 }

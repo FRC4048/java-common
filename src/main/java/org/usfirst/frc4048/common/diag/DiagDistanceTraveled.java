@@ -26,7 +26,10 @@ public abstract class DiagDistanceTraveled implements Diagnosable {
 
     @Override
     public void setShuffleBoardTab(ShuffleboardTab shuffleBoardTab, int width, int height) {
-        networkTableEntry = shuffleBoardTab.getLayout(title, BuiltInLayouts.kList).withSize(width, height).add(name, false).getEntry(); //getLayout(title, BuiltInLayouts.kList)
+        networkTableEntry = shuffleBoardTab.getLayout(title, BuiltInLayouts.kList)
+                .withSize(width, height)
+                .add(name, false)
+                .getEntry();
     }
 
     
