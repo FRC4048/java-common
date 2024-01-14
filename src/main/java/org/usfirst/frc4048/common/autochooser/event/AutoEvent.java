@@ -30,7 +30,7 @@ public class AutoEvent {
           if (this == o) return true;
           if (o == null || getClass() != o.getClass()) return false;
           AutoEvent autoEvent = (AutoEvent) o;
-          return action == autoEvent.action && location == autoEvent.location;
+          return action.equals(autoEvent.action) && location.equals(autoEvent.location);
      }
 
      @Override
