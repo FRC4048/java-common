@@ -1,32 +1,32 @@
 package org.usfirst.frc4048.common.logging;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class ParallelLoggingCommand extends LoggingCommand {
+public class RaceLoggingCommand extends LoggingCommand {
     private static final String THIS_NAME = "-this";
 
     private List<LoggingCommand> loggingCommands;
 
     /**
-     * Constructor for parallel command group.
+     * Constructor for race command group.
      *
      * @param namePrefix the name for the group - this is where the sub-commands for this group will be nested in
      * @param commands   the sub commands for this group (either regular commands or LoggingCommand are OK)
      */
-    public ParallelLoggingCommand(String namePrefix, Command... commands) {
-        super(namePrefix, THIS_NAME, new ParallelCommandGroup());
+    public RaceLoggingCommand(String namePrefix, Command... commands) {
+        super(namePrefix, THIS_NAME, new ParallelRaceGroup());
         LoggingCommand[] wrapped = CommandUtil.wrapForLogging(namePrefix, commands);
-        ((ParallelCommandGroup) getUnderlying()).addCommands(wrapped);
+        ((ParallelRaceGroup) getUnderlying()).addCommands(wrapped);
         this.loggingCommands = Arrays.asList(wrapped);
     }
 
     public final void addCommands(Command... commands) {
         LoggingCommand[] wrapped = CommandUtil.wrapForLogging(getNamePrefix(), commands);
-        ((ParallelCommandGroup) getUnderlying()).addCommands(wrapped);
+        ((ParallelRaceGroup) getUnderlying()).addCommands(wrapped);
         loggingCommands.addAll(Arrays.asList(wrapped));
     }
 
