@@ -1,4 +1,4 @@
-package frc.robot.swervev2;
+package org.usfirst.frc4048.common.swervev2;
 
 public class KinematicsConversionConfig {
      private final double wheelRadius;

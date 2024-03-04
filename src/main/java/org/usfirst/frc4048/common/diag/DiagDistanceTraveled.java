@@ -32,7 +32,6 @@ public abstract class DiagDistanceTraveled implements Diagnosable {
                 .getEntry();
     }
 
-    
 
     @Override
     public void refresh() {

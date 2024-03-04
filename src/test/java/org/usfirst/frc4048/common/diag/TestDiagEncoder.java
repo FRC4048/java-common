@@ -1,8 +1,8 @@
 package org.usfirst.frc4048.common.diag;
 
 import edu.wpi.first.wpilibj.Encoder;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.mockito.Mockito.when;
@@ -17,16 +17,16 @@ public class TestDiagEncoder {
         DiagEncoder classUnderTest = new DiagEncoder("","encoder", 100, mockEncoder);
 
         when(mockEncoder.get()).thenReturn(51);
-        Assert.assertFalse(classUnderTest.getDiagResult());
+        Assertions.assertFalse(classUnderTest.getDiagResult());
 
         when(mockEncoder.get()).thenReturn(-50);
-        Assert.assertFalse(classUnderTest.getDiagResult());
+        Assertions.assertFalse(classUnderTest.getDiagResult());
 
         when(mockEncoder.get()).thenReturn(101);
-        Assert.assertTrue(classUnderTest.getDiagResult());
+        Assertions.assertTrue(classUnderTest.getDiagResult());
 
         when(mockEncoder.get()).thenReturn(50);
-        Assert.assertTrue(classUnderTest.getDiagResult());
+        Assertions.assertTrue(classUnderTest.getDiagResult());
     }
 
     @Test
@@ -37,9 +37,9 @@ public class TestDiagEncoder {
         DiagEncoder classUnderTest = new DiagEncoder("Diags","encoder", 100, mockEncoder);
 
         when(mockEncoder.get()).thenReturn(101);
-        Assert.assertTrue(classUnderTest.getDiagResult());
+        Assertions.assertTrue(classUnderTest.getDiagResult());
 
         classUnderTest.reset();
-        Assert.assertFalse(classUnderTest.getDiagResult());
+        Assertions.assertFalse(classUnderTest.getDiagResult());
     }
 }

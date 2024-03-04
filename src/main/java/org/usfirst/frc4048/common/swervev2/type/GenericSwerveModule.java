@@ -1,4 +1,4 @@
-package frc.robot.swervev2.type;
+package org.usfirst.frc4048.common.swervev2.type;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -6,9 +6,9 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import frc.robot.swervev2.Gain;
-import frc.robot.swervev2.PID;
-import frc.robot.swervev2.components.GenericEncodedSwerve;
+import org.usfirst.frc4048.common.swervev2.components.GenericEncodedSwerve;
+import org.usfirst.frc4048.common.util.Gain;
+import org.usfirst.frc4048.common.util.PID;
 
 public class GenericSwerveModule implements StatedSwerve {
     private final PIDController drivePIDController;

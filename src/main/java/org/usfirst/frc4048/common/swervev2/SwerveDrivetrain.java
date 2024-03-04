@@ -1,4 +1,4 @@
-package frc.robot.swervev2;
+package org.usfirst.frc4048.common.swervev2;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -7,9 +7,9 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
-import frc.robot.swervev2.components.EncodedSwerveSparkMax;
-import frc.robot.swervev2.type.GenericSwerveModule;
+import org.usfirst.frc4048.common.Constants;
+import org.usfirst.frc4048.common.swervev2.components.EncodedSwerveSparkMax;
+import org.usfirst.frc4048.common.swervev2.type.GenericSwerveModule;
 
 public class SwerveDrivetrain extends SubsystemBase {
     
@@ -37,7 +37,7 @@ public class SwerveDrivetrain extends SubsystemBase {
     }
 
     public SwerveDrivetrain(SwerveIdConfig frontLeftConfig, SwerveIdConfig frontRightConfig, SwerveIdConfig backLeftConfig, SwerveIdConfig backRightConfig,
-                            KinematicsConversionConfig conversionConfig, SwervePidConfig pidConfig, Gyro gyro) 
+                            KinematicsConversionConfig conversionConfig, SwervePidConfig pidConfig, Gyro gyro)
     {
         this.gyro = gyro;
         EncodedSwerveSparkMax encodedSwerveSparkMaxFL = new EncodedSwerveMotorBuilder(frontLeftConfig, conversionConfig).build();

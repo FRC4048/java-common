@@ -20,7 +20,7 @@ public abstract class DiagBoolean implements Diagnosable {
     /**
      * Constructor
      *
-     * @param name            the name of the unit. Will be used on the Shuffleboard
+     * @param name the name of the unit. Will be used on the Shuffleboard
      */
     public DiagBoolean(String title, String name) {
         this.title = title;
