@@ -1,7 +1,6 @@
 package org.usfirst.frc4048.common.diag;
 
 import edu.wpi.first.networktables.GenericEntry;
-import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
@@ -21,7 +20,7 @@ public abstract class DiagBoolean implements Diagnosable {
     /**
      * Constructor
      *
-     * @param name            the name of the unit. Will be used on the Shuffleboard
+     * @param name the name of the unit. Will be used on the Shuffleboard
      */
     public DiagBoolean(String title, String name) {
         this.title = title;

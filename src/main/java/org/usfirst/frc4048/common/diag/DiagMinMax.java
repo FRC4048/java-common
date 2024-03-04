@@ -1,12 +1,11 @@
 package org.usfirst.frc4048.common.diag;
 
 import edu.wpi.first.networktables.GenericEntry;
-import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 /**
- * Abstract diagnostics class for devices that need a minimum and maximum reading to be tested. 
+ * Abstract diagnostics class for devices that need a minimum and maximum reading to be tested.
  * The diagnostics will turn green once the device has reached both points.
  */
 public abstract class DiagMinMax implements Diagnosable {
@@ -23,9 +22,9 @@ public abstract class DiagMinMax implements Diagnosable {
     /**
      * Constructor
      *
-     * @param name            - the name of the unit. Will be used on the Shuffleboard
-     * @param minValue        - the minimum value the object needs to hit to qualify for success
-     * @param maxValue        - the maximum value the object needs to hit to qualify for success
+     * @param name     - the name of the unit. Will be used on the Shuffleboard
+     * @param minValue - the minimum value the object needs to hit to qualify for success
+     * @param maxValue - the maximum value the object needs to hit to qualify for success
      */
     public DiagMinMax(String title, String name, double minValue, double maxValue) {
         this.name = name;

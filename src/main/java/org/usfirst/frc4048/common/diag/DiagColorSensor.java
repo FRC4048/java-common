@@ -8,14 +8,11 @@
 package org.usfirst.frc4048.common.diag;
 
 import edu.wpi.first.networktables.GenericEntry;
-import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import org.usfirst.frc4048.common.util.ColorSensor;
-import org.usfirst.frc4048.common.util.ColorValue;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -28,7 +25,7 @@ public class DiagColorSensor implements Diagnosable {
     private String name;
     private String title;
     private GenericEntry networkTableEntry;
-    private Map<ColorValue, Boolean> colorMap;
+    private Map<ColorSensor.ColorValue, Boolean> colorMap;
 
     public DiagColorSensor(String name, String title, ColorSensor colorsensor) {
         this.name = name;
@@ -44,7 +41,7 @@ public class DiagColorSensor implements Diagnosable {
 
     @Override
     public void refresh() {
-        ColorValue colorValue = colorsensor.getColor();
+        ColorSensor.ColorValue colorValue = colorsensor.getColor();
         colorMap.put(colorValue, true);
         boolean allColors = colorMap.values().stream().allMatch(value -> value);
         if (networkTableEntry != null) {
@@ -54,6 +51,6 @@ public class DiagColorSensor implements Diagnosable {
 
     @Override
     public void reset() {
-        colorMap = Arrays.stream(ColorValue.values()).collect(Collectors.toMap(colorValue -> colorValue, colorValue -> false));
+        colorMap = Arrays.stream(ColorSensor.ColorValue.values()).collect(Collectors.toMap(colorValue -> colorValue, colorValue -> false));
     }
 }

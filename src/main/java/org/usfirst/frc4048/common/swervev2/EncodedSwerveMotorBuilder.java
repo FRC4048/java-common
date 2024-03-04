@@ -1,10 +1,9 @@
-package frc.robot.swervev2;
+package org.usfirst.frc4048.common.swervev2;
 
 import com.ctre.phoenix.sensors.WPI_CANCoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-import frc.robot.swervev2.components.EncodedSwerveSparkMax;
-import frc.robot.swervev2.components.GenericEncodedSwerve;
+import org.usfirst.frc4048.common.swervev2.components.EncodedSwerveSparkMax;
 
 public class EncodedSwerveMotorBuilder {
      private final SwerveIdConfig motorConfig;

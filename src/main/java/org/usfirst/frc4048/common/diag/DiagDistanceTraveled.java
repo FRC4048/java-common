@@ -1,7 +1,6 @@
 package org.usfirst.frc4048.common.diag;
 
 import edu.wpi.first.networktables.GenericEntry;
-import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
@@ -32,7 +31,6 @@ public abstract class DiagDistanceTraveled implements Diagnosable {
                 .add(name, false)
                 .getEntry();
     }
-
 
 
     @Override
