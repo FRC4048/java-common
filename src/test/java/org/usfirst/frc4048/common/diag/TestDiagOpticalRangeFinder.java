@@ -1,11 +1,11 @@
 package org.usfirst.frc4048.common.diag;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.usfirst.frc4048.common.util.OpticalRangeFinder;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 public class TestDiagOpticalRangeFinder{
 
@@ -16,13 +16,13 @@ public class TestDiagOpticalRangeFinder{
         DiagOpticalRangeFinder classUnderTest = new DiagOpticalRangeFinder("Optical Range Finder", mockOpticalRangeFinder,3.0, 12.0);
 
         when(mockOpticalRangeFinder.getDistanceInInches()).thenReturn(7.0);
-        Assert.assertFalse(classUnderTest.getDiagResult(classUnderTest.getSensorReading()));
+        Assertions.assertFalse(classUnderTest.getDiagResult(classUnderTest.getSensorReading()));
 
         when(mockOpticalRangeFinder.getDistanceInInches()).thenReturn(14.0);
-        Assert.assertFalse(classUnderTest.getDiagResult(classUnderTest.getSensorReading()));
+        Assertions.assertFalse(classUnderTest.getDiagResult(classUnderTest.getSensorReading()));
 
         when(mockOpticalRangeFinder.getDistanceInInches()).thenReturn(1.0);
-        Assert.assertTrue(classUnderTest.getDiagResult(classUnderTest.getSensorReading()));
+        Assertions.assertTrue(classUnderTest.getDiagResult(classUnderTest.getSensorReading()));
     }
 
     @Test
@@ -32,15 +32,15 @@ public class TestDiagOpticalRangeFinder{
         DiagOpticalRangeFinder classUnderTest = new DiagOpticalRangeFinder("Optical Range Finder", mockOpticalRangeFinder, 3.0, 12.0);
 
         when(mockOpticalRangeFinder.getDistanceInInches()).thenReturn(7.0);
-        Assert.assertFalse(classUnderTest.getDiagResult(classUnderTest.getSensorReading()));
+        Assertions.assertFalse(classUnderTest.getDiagResult(classUnderTest.getSensorReading()));
 
         when(mockOpticalRangeFinder.getDistanceInInches()).thenReturn(14.0);
-        Assert.assertFalse(classUnderTest.getDiagResult(classUnderTest.getSensorReading()));
+        Assertions.assertFalse(classUnderTest.getDiagResult(classUnderTest.getSensorReading()));
 
         when(mockOpticalRangeFinder.getDistanceInInches()).thenReturn(1.0);
-        Assert.assertTrue(classUnderTest.getDiagResult(classUnderTest.getSensorReading()));
+        Assertions.assertTrue(classUnderTest.getDiagResult(classUnderTest.getSensorReading()));
 
         classUnderTest.reset();
-        Assert.assertFalse(classUnderTest.getDiagResult(classUnderTest.getSensorReading()));
+        Assertions.assertFalse(classUnderTest.getDiagResult(classUnderTest.getSensorReading()));
     }
 }

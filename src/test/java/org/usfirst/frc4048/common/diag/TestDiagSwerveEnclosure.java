@@ -1,7 +1,7 @@
 package org.usfirst.frc4048.common.diag;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.usfirst.frc4048.common.swerve.drive.SparkMAXSwerveEnclosure;
 
@@ -17,16 +17,16 @@ public class TestDiagSwerveEnclosure {
         DiagSwerveEnclosureSparkMAX classUnderTest = new DiagSwerveEnclosureSparkMAX("enclosure", 100, mockEnclosure);
 
         when(mockEnclosure.getLastEncPosition()).thenReturn(51);
-        Assert.assertFalse(classUnderTest.getDiagResult());
+        Assertions.assertFalse(classUnderTest.getDiagResult());
 
         when(mockEnclosure.getLastEncPosition()).thenReturn(-50);
-        Assert.assertFalse(classUnderTest.getDiagResult());
+        Assertions.assertFalse(classUnderTest.getDiagResult());
 
         when(mockEnclosure.getLastEncPosition()).thenReturn(101);
-        Assert.assertTrue(classUnderTest.getDiagResult());
+        Assertions.assertTrue(classUnderTest.getDiagResult());
 
         when(mockEnclosure.getLastEncPosition()).thenReturn(50);
-        Assert.assertTrue(classUnderTest.getDiagResult());
+        Assertions.assertTrue(classUnderTest.getDiagResult());
     }
 
     @Test
@@ -37,9 +37,9 @@ public class TestDiagSwerveEnclosure {
         DiagSwerveEnclosureSparkMAX classUnderTest = new DiagSwerveEnclosureSparkMAX("enclosure", 100, mockEnclosure);
 
         when(mockEnclosure.getLastEncPosition()).thenReturn(101);
-        Assert.assertTrue(classUnderTest.getDiagResult());
+        Assertions.assertTrue(classUnderTest.getDiagResult());
 
         classUnderTest.reset();
-        Assert.assertFalse(classUnderTest.getDiagResult());
+        Assertions.assertFalse(classUnderTest.getDiagResult());
     }
 }

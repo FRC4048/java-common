@@ -1,7 +1,7 @@
 package org.usfirst.frc4048.common.util;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.usfirst.frc4048.common.util.AngleFinder;
 import org.usfirst.frc4048.common.util.IRangeFinder;
 
@@ -28,31 +28,31 @@ public class TestAngleFinder {
   @Test
   public void test11x10x20() {
     AngleFinder af = new AngleFinder(dist(11), dist(10), 20);
-    Assert.assertEquals(2.86, af.calcAngleInDegrees(), PRECISION);
+    Assertions.assertEquals(2.86, af.calcAngleInDegrees(), PRECISION);
   }
 
   @Test
   public void test11x10x30() {
     AngleFinder af = new AngleFinder(dist(11), dist(10), 30);
-    Assert.assertEquals(1.91, af.calcAngleInDegrees(), PRECISION);
+    Assertions.assertEquals(1.91, af.calcAngleInDegrees(), PRECISION);
   }
 
   @Test
   public void test11x10x40() {
     AngleFinder af = new AngleFinder(dist(11), dist(10), 40);
-    Assert.assertEquals(1.43, af.calcAngleInDegrees(), PRECISION);
+    Assertions.assertEquals(1.43, af.calcAngleInDegrees(), PRECISION);
   }
 
   @Test
   public void test11x10x50() {
     AngleFinder af = new AngleFinder(dist(11), dist(10), 50);
-    Assert.assertEquals(1.15, af.calcAngleInDegrees(), PRECISION);
+    Assertions.assertEquals(1.15, af.calcAngleInDegrees(), PRECISION);
   }
   
   @Test
   public void test10x11x20() {
     AngleFinder af = new AngleFinder(dist(10), dist(11), 20);
-    Assert.assertEquals(-2.86, af.calcAngleInDegrees(), PRECISION);
+    Assertions.assertEquals(-2.86, af.calcAngleInDegrees(), PRECISION);
   }
 
   /**
@@ -68,7 +68,7 @@ public class TestAngleFinder {
    */
   private void testCase(final double distL, final double distR, final double expectedAngle) {
     AngleFinder af = new AngleFinder(dist(distL), dist(distR), 10);
-    Assert.assertEquals(expectedAngle, af.calcAngleInDegrees(), PRECISION);
+    Assertions.assertEquals(expectedAngle, af.calcAngleInDegrees(), PRECISION);
   }
 
   @Test

@@ -1,11 +1,11 @@
 package org.usfirst.frc4048.common.diag;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 public class TestDiagSwitch {
 
@@ -16,10 +16,10 @@ public class TestDiagSwitch {
         DiagSwitch classUnderTest = new DiagSwitch("switch", mockInput);
 
         when(mockInput.get()).thenReturn(true);
-        Assert.assertFalse(classUnderTest.getDiagResult());
+        Assertions.assertFalse(classUnderTest.getDiagResult());
 
         when(mockInput.get()).thenReturn(false);
-        Assert.assertTrue(classUnderTest.getDiagResult());
+        Assertions.assertTrue(classUnderTest.getDiagResult());
     }
 
     @Test
@@ -29,11 +29,11 @@ public class TestDiagSwitch {
         DiagSwitch classUnderTest = new DiagSwitch("switch", mockInput);
 
         when(mockInput.get()).thenReturn(true);
-        Assert.assertFalse(classUnderTest.getDiagResult());
+        Assertions.assertFalse(classUnderTest.getDiagResult());
         when(mockInput.get()).thenReturn(false);
-        Assert.assertTrue(classUnderTest.getDiagResult());
+        Assertions.assertTrue(classUnderTest.getDiagResult());
 
         classUnderTest.reset();
-        Assert.assertFalse(classUnderTest.getDiagResult());
+        Assertions.assertFalse(classUnderTest.getDiagResult());
     }
 }
