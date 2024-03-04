@@ -16,6 +16,7 @@ import java.util.List;
 public class Diagnostics extends SubsystemBase {
 
     public static final String SHUFFLEBOARD_TAB_NAME =  "Diagnostics";
+    public static final int width = 1, height = 4;
 
     private ShuffleboardTab shuffleBoardTab;
 
@@ -30,7 +31,6 @@ public class Diagnostics extends SubsystemBase {
         addDiagnosable(new DiagSwitch("Switch1", new DigitalInput(1), shuffleBoardTab));
         addDiagnosable(new DiagPot("Pot1", 0.1, 0.9, new AnalogPotentiometer(0), shuffleBoardTab));
         addDiagnosable(new DiagEncoder("Encoder1", 100, new Encoder(5,6), shuffleBoardTab));
-
         addDiagnosable(new DiagOpticalSensor("OpticalSensor1", new DigitalInput(2), shuffleBoardTab));
         addDiagnosable(new DiagOpticalRangeFinder("OpticalRangeFinder1", new OpticalRangeFinder(new AnalogInput(1)), shuffleBoardTab, 3.0, 12.0));
         addDiagnosable(new DiagSonar("Sonar1", new Ultrasonic(3, 4), shuffleBoardTab, 3.0, 12.0));
@@ -38,9 +38,10 @@ public class Diagnostics extends SubsystemBase {
     }
 
     public void addDiagnosable(Diagnosable diagnosable) {
-        diagnosable.setShuffleBoardTab(shuffleBoardTab);
+        diagnosable.setShuffleBoardTab(shuffleBoardTab, width, height);
         diagnosables.add(diagnosable);
     }
+
 
     /**
      * Refresh the display with current values.
