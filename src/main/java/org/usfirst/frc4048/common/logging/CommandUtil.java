@@ -124,9 +124,7 @@ public class CommandUtil {
 
     private static LoggingCommand wrapForLogging(String prefix, Command command) {
         if (command instanceof LoggingCommand loggingCommand) {
-            // change the prefix to include the current new parent
-            String childPrefix = prefix + CommandUtil.NAME_SEPARATOR + loggingCommand.getNamePrefix();
-            loggingCommand.setNamePrefix(childPrefix);
+            loggingCommand.appendNamePrefix(prefix);
             return loggingCommand;
         } else {
             // New command located in the given sequence root
