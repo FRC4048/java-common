@@ -34,7 +34,7 @@ public class LoggingTest {
         SequentialLoggingCommand sequence = (SequentialLoggingCommand) CommandUtil.sequence("sequence", command);
         Assertions.assertEquals("sequence", sequence.getNamePrefix());
         Assertions.assertEquals("Commands/sequence/-this", sequence.getFullyQualifiedName());
-        Assertions.assertEquals("Commands/sequence/InstantCommand", sequence.getLoggingCommands().get(0).getFullyQualifiedName());
+        Assertions.assertEquals("Commands/sequence/InstantCommand", sequence.getChildLoggingCommands().get(0).getFullyQualifiedName());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class LoggingTest {
         SequentialLoggingCommand sequence = (SequentialLoggingCommand) CommandUtil.sequence("sequence", command);
         Assertions.assertEquals("sequence", sequence.getNamePrefix());
         Assertions.assertEquals("Commands/sequence/-this", sequence.getFullyQualifiedName());
-        Assertions.assertEquals("Commands/sequence/command", sequence.getLoggingCommands().get(0).getFullyQualifiedName());
+        Assertions.assertEquals("Commands/sequence/command", sequence.getChildLoggingCommands().get(0).getFullyQualifiedName());
     }
 
     @Test
@@ -57,7 +57,7 @@ public class LoggingTest {
         SequentialLoggingCommand sequence = (SequentialLoggingCommand) CommandUtil.sequence("sequence", command);
         Assertions.assertEquals("sequence", sequence.getNamePrefix());
         Assertions.assertEquals("Commands/sequence/-this", sequence.getFullyQualifiedName());
-        Assertions.assertEquals("Commands/sequence/command/InstantCommand", sequence.getLoggingCommands().get(0).getFullyQualifiedName());
+        Assertions.assertEquals("Commands/sequence/command/InstantCommand", sequence.getChildLoggingCommands().get(0).getFullyQualifiedName());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class LoggingTest {
         SequentialLoggingCommand sequence = (SequentialLoggingCommand) CommandUtil.sequence("sequence", CommandUtil.logged("logged", command));
         Assertions.assertEquals("sequence", sequence.getNamePrefix());
         Assertions.assertEquals("Commands/sequence/-this", sequence.getFullyQualifiedName());
-        Assertions.assertEquals("Commands/sequence/logged/command", sequence.getLoggingCommands().get(0).getFullyQualifiedName());
+        Assertions.assertEquals("Commands/sequence/logged/command", sequence.getChildLoggingCommands().get(0).getFullyQualifiedName());
     }
 
     @Test
@@ -85,7 +85,7 @@ public class LoggingTest {
         SequentialLoggingCommand sequence = (SequentialLoggingCommand) CommandUtil.sequence("sequence", CommandUtil.logged(command));
         Assertions.assertEquals("sequence", sequence.getNamePrefix());
         Assertions.assertEquals("Commands/sequence/-this", sequence.getFullyQualifiedName());
-        Assertions.assertEquals("Commands/sequence/null/command", sequence.getLoggingCommands().get(0).getFullyQualifiedName());
+        Assertions.assertEquals("Commands/sequence/null/command", sequence.getChildLoggingCommands().get(0).getFullyQualifiedName());
     }
 
     @Test
@@ -100,9 +100,9 @@ public class LoggingTest {
         SequentialLoggingCommand outer = (SequentialLoggingCommand) CommandUtil.sequence("outer", inner);
         Assertions.assertEquals("outer", outer.getNamePrefix());
         Assertions.assertEquals("Commands/outer/-this", outer.getFullyQualifiedName());
-        inner = (SequentialLoggingCommand) outer.getLoggingCommands().get(0);
+        inner = (SequentialLoggingCommand) outer.getChildLoggingCommands().get(0);
         Assertions.assertEquals("Commands/outer/inner/-this", inner.getFullyQualifiedName());
-        Assertions.assertEquals("Commands/outer/inner/command", inner.getLoggingCommands().get(0).getFullyQualifiedName());
+        Assertions.assertEquals("Commands/outer/inner/command", inner.getChildLoggingCommands().get(0).getFullyQualifiedName());
     }
 
     @Test
@@ -117,9 +117,28 @@ public class LoggingTest {
         SequentialLoggingCommand outer = (SequentialLoggingCommand) CommandUtil.sequence("outer", inner);
         Assertions.assertEquals("outer", outer.getNamePrefix());
         Assertions.assertEquals("Commands/outer/-this", outer.getFullyQualifiedName());
-        inner = (SequentialLoggingCommand) outer.getLoggingCommands().get(0);
+        inner = (SequentialLoggingCommand) outer.getChildLoggingCommands().get(0);
         Assertions.assertEquals("Commands/outer/inner/-this", inner.getFullyQualifiedName());
-        Assertions.assertEquals("Commands/outer/inner/command", inner.getLoggingCommands().get(0).getFullyQualifiedName());
+        Assertions.assertEquals("Commands/outer/inner/logged/command", inner.getChildLoggingCommands().get(0).getFullyQualifiedName());
+    }
+
+    @Test
+    public void testFourLevelNesting() {
+        Command command = new Command() {
+            @Override
+            public String getName() {
+                return "command";
+            }
+        };
+        SequentialLoggingCommand first = (SequentialLoggingCommand) CommandUtil.sequence("first", CommandUtil.logged("logged", command));
+        SequentialLoggingCommand second = (SequentialLoggingCommand) CommandUtil.sequence("second", first);
+        SequentialLoggingCommand third = (SequentialLoggingCommand) CommandUtil.sequence("third", second);
+        SequentialLoggingCommand fourth = (SequentialLoggingCommand) CommandUtil.sequence("fourth", third);
+
+        Assertions.assertEquals("Commands/fourth/-this", fourth.getFullyQualifiedName());
+        Assertions.assertEquals("Commands/fourth/third/-this", third.getFullyQualifiedName());
+        Assertions.assertEquals("Commands/fourth/third/second/-this", second.getFullyQualifiedName());
+        Assertions.assertEquals("Commands/fourth/third/second/first/-this", first.getFullyQualifiedName());
     }
 
     @Test
@@ -127,7 +146,7 @@ public class LoggingTest {
         SequentialLoggingCommand customSequence = new CustomSequentialGroup();
         Assertions.assertEquals("Sequence", customSequence.getNamePrefix());
         Assertions.assertEquals("Commands/Sequence/-this", customSequence.getFullyQualifiedName());
-        Assertions.assertEquals("Commands/Sequence/Command", customSequence.getLoggingCommands().get(0).getFullyQualifiedName());
+        Assertions.assertEquals("Commands/Sequence/Command", customSequence.getChildLoggingCommands().get(0).getFullyQualifiedName());
     }
 
     @Test
@@ -135,8 +154,8 @@ public class LoggingTest {
         SequentialLoggingCommand customSequence = new CustomSequentialGroup();
         SequentialLoggingCommand outer = (SequentialLoggingCommand) CommandUtil.sequence("outer", customSequence);
         Assertions.assertEquals("outer", outer.getNamePrefix());
-        Assertions.assertEquals("Commands/outer/Sequence/-this", outer.getLoggingCommands().get(0).getFullyQualifiedName());
-        Assertions.assertEquals("Commands/outer/Sequence/Command", ((SequentialLoggingCommand) outer.getLoggingCommands().get(0)).getLoggingCommands().get(0).getFullyQualifiedName());
+        Assertions.assertEquals("Commands/outer/Sequence/-this", outer.getChildLoggingCommands().get(0).getFullyQualifiedName());
+        Assertions.assertEquals("Commands/outer/Sequence/Command", ((SequentialLoggingCommand) outer.getChildLoggingCommands().get(0)).getChildLoggingCommands().get(0).getFullyQualifiedName());
     }
 
     private static class CustomSequentialGroup extends SequentialLoggingCommand {
