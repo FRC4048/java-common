@@ -32,6 +32,18 @@ import edu.wpi.first.wpilibj2.command.*;
  *     Command pickUp = CommandUtil.sequence("ArmSequence", new OpenGripper(), new RaiseArm(), new CloseGripper());
  *     Command pickupAndDrive = CommandUtil.parallel("WalkWhileChewingGum", pickup, new Drive());
  * </pre>
+ *
+ * and also for nesting command groups that are custom-created:
+ * (Note the "extends SequentialLoggingCommandGroup" - DO NOT extend regular SequentialCommandGroup or this will not work)
+ * <pre>
+ *     class PickupGroup extends SequentialLoggingCommandGroup {
+ *         public PickupGroup() {
+ *             super("Pickup", new OpenGripper(), new RaiseArm(), new CloseGripper());
+ *         }
+ *     }
+ *     Command pickUp = new PickupGroup();
+ *     Command pickupAndDrive = CommandUtil.parallel("WalkWhileChewingGum", pickup, new Drive());
+ * </pre>
  */
 public class CommandUtil {
     public static final String COMMAND_PREFIX = "Commands";
@@ -52,6 +64,8 @@ public class CommandUtil {
     /**
      * Make a logging command from the given command, with a custom name hierarchy.
      * The logging command will be placed within the given name prefix naming hierarchy instead of at the root.
+     * @param namePrefix the nesting hierarchy prefix for the command. If null the command is going to log at the
+     *                   root level. If not null it will be nested in this namespace.
      * @param command the command to wrap
      * @return a {@link LoggingCommand} that wraps the given command
      */
@@ -60,7 +74,7 @@ public class CommandUtil {
     }
 
     /**
-     * Return a logged command that runs once and stops (see {@link Commands#runOnce(Runnable, Subsystem...)}.
+     * Return a logged command that runs once and stops (see {@link edu.wpi.first.wpilibj2.command.Commands#runOnce(Runnable, Subsystem...)}.
      * This will return a loggable anonymous command with the given name.
      * @param name the name of the resulting command
      * @param action the action to perform (only once)
@@ -76,28 +90,30 @@ public class CommandUtil {
     /**
      * Return a loggable {@link SequentialCommandGroup} that executes the given commands sequentially. The given commands
      * can be any command or command group - they will be converted to loggable commands implicitly.
-     * @param sequenceName the name of the resaulting command group
+     * @param sequenceName the name of the resulting command group
      * @param commands the commands to put in the group
      * @return the created loggable command group
      */
     public static Command sequence(String sequenceName, Command... commands) {
-        LoggingCommand[] loggingCommands = wrapForLogging(sequenceName, commands);
-        return new SequentialLoggingCommand(sequenceName, loggingCommands);
+        return new SequentialLoggingCommand(sequenceName, commands);
     }
 
     /**
      * Return a loggable {@link ParallelCommandGroup} that executes the given commands in parallel. The given commands
      * can be any command or command group - they will be converted to loggable commands implicitly.
-     * @param sequenceName the name of the resaulting command group
+     * @param sequenceName the name of the resulting command group
      * @param commands the commands to put in the group
      * @return the created loggable command group
      */
     public static Command parallel(String sequenceName, Command... commands) {
-        LoggingCommand[] loggingCommands = wrapForLogging(sequenceName, commands);
-        return new ParallelLoggingCommand(sequenceName, loggingCommands);
+        return new ParallelLoggingCommand(sequenceName, commands);
     }
 
-    private static LoggingCommand[] wrapForLogging(String prefix, Command... commands) {
+    public static Command race(String sequenceName, Command... commands) {
+        return new RaceLoggingCommand(sequenceName, commands);
+    }
+
+    public static LoggingCommand[] wrapForLogging(String prefix, Command... commands) {
         // Do not use streams due to efficiency
         LoggingCommand[] newCommands = new LoggingCommand[commands.length];
         for (int i = 0; i < commands.length; i++) {
@@ -108,9 +124,7 @@ public class CommandUtil {
 
     private static LoggingCommand wrapForLogging(String prefix, Command command) {
         if (command instanceof LoggingCommand loggingCommand) {
-            // change the prefix to include the current new parent
-            String childPrefix = prefix + CommandUtil.NAME_SEPARATOR + loggingCommand.getNamePrefix();
-            loggingCommand.setNamePrefix(childPrefix);
+            loggingCommand.appendNamePrefix(prefix);
             return loggingCommand;
         } else {
             // New command located in the given sequence root
