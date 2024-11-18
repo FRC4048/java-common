@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ProxyCommand;
 
+import java.util.Objects;
+
 public class LoggableParallelCommandGroup extends ParallelCommandGroup implements Loggable {
     private String basicName = getClass().getSimpleName();
     private Command parent = new BlankCommand();
@@ -41,5 +43,18 @@ public class LoggableParallelCommandGroup extends ParallelCommandGroup implement
     public LoggableParallelCommandGroup withBasicName(String name){
         this.basicName = name;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LoggableParallelCommandGroup that = (LoggableParallelCommandGroup) o;
+        return Objects.equals(basicName, that.basicName) && Objects.equals(parent, that.parent);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(basicName, parent);
     }
 }

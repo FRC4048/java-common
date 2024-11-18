@@ -3,6 +3,7 @@ package org.usfirst.frc4048.common.loggingv2;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class LoggableCommandWrapper extends Command implements Loggable {
@@ -78,4 +79,16 @@ public class LoggableCommandWrapper extends Command implements Loggable {
         return wrap.runsWhenDisabled();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LoggableCommandWrapper that = (LoggableCommandWrapper) o;
+        return Objects.equals(basicName, that.basicName) && Objects.equals(parent, that.parent) && Objects.equals(wrap, that.wrap);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(basicName, parent, wrap);
+    }
 }

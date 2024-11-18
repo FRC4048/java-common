@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ProxyCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
+import java.util.Objects;
+
 public class LoggableSequentialCommandGroup extends SequentialCommandGroup implements Loggable {
     private String basicName = getClass().getSimpleName();
     private Command parent = new BlankCommand();
@@ -40,5 +42,18 @@ public class LoggableSequentialCommandGroup extends SequentialCommandGroup imple
     public LoggableSequentialCommandGroup withBasicName(String name){
         this.basicName = name;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LoggableSequentialCommandGroup that = (LoggableSequentialCommandGroup) o;
+        return Objects.equals(basicName, that.basicName) && Objects.equals(parent, that.parent);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(basicName, parent);
     }
 }

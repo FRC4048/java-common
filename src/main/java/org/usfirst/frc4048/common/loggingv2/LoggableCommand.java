@@ -2,6 +2,8 @@ package org.usfirst.frc4048.common.loggingv2;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
+import java.util.Objects;
+
 public class LoggableCommand extends Command implements Loggable {
     private String basicName = getClass().getSimpleName();
     private Command parent = new BlankCommand();
@@ -31,4 +33,16 @@ public class LoggableCommand extends Command implements Loggable {
         return this;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LoggableCommand that = (LoggableCommand) o;
+        return Objects.equals(basicName, that.basicName) && Objects.equals(parent, that.parent);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(basicName, parent);
+    }
 }
