@@ -7,7 +7,7 @@ import org.littletonrobotics.junction.Logger;
 import java.util.*;
 
 public class CommandLogger {
-    private final LinkedHashMap<Command, Queue<Boolean>> toLogCommandStatus = new LinkedHashMap<>();
+    private final LinkedHashMap<CommandKey, Queue<Boolean>> toLogCommandStatus = new LinkedHashMap<>();
     private static final CommandLogger inst = new CommandLogger();
     private boolean hasInit;
 
@@ -22,25 +22,25 @@ public class CommandLogger {
         CommandScheduler.getInstance().onCommandInitialize(command -> {
             Queue<Boolean> toLogBools = toLogCommandStatus.getOrDefault(command, new LinkedList<>());
             toLogBools.add(true);
-            toLogCommandStatus.put(command, toLogBools);
+            toLogCommandStatus.put(new CommandKey(command.toString()), toLogBools);
         });
         CommandScheduler.getInstance().onCommandFinish(command -> {
             Queue<Boolean> toLogBools = toLogCommandStatus.getOrDefault(command, new LinkedList<>());
             toLogBools.add(false);
-            toLogCommandStatus.put(command, toLogBools);
+            toLogCommandStatus.put(new CommandKey(command.toString()), toLogBools);
         });
         CommandScheduler.getInstance().onCommandInterrupt(command -> {
             Queue<Boolean> toLogBools = toLogCommandStatus.getOrDefault(command, new LinkedList<>());
             toLogBools.add(false);
-            toLogCommandStatus.put(command, toLogBools);
+            toLogCommandStatus.put(new CommandKey(command.toString()), toLogBools);
         });
         hasInit = true;
     }
 
     public void log() {
-        Iterator<Map.Entry<Command, Queue<Boolean>>> iterator = toLogCommandStatus.entrySet().iterator();
+        Iterator<Map.Entry<CommandKey, Queue<Boolean>>> iterator = toLogCommandStatus.entrySet().iterator();
         while (iterator.hasNext()){
-            Map.Entry<Command, Queue<Boolean>> entry = iterator.next();
+            Map.Entry<CommandKey, Queue<Boolean>> entry = iterator.next();
             Boolean poll = entry.getValue().poll();
             if (poll != null) {
                 Logger.recordOutput("Command/" + entry.getKey().toString(), poll);
