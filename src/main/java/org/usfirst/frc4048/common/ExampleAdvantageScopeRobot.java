@@ -53,9 +53,11 @@ public class ExampleAdvantageScopeRobot extends LoggedRobot {
             Runnable poll = logsToMainThread.poll();
             while (poll != null){
                 poll.run();
-                if (Logger.getRealTimestamp() - startTime <= 3000){
+                long now = Logger.getRealTimestamp();
+                if (now - startTime <= Constants.MAX_LOG_TIME_WAIT){
                     poll = logsToMainThread.poll();
                 } else {
+                    Logger.recordOutput("LOGGING_ERROR", "Took To Long @" + now);
                     break;
                 }
             }

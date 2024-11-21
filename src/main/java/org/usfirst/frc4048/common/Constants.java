@@ -8,4 +8,5 @@ public class Constants {
     public static final double ROBOT_WIDTH = 1.0;
     public static final double MAX_VELOCITY = 1.0;
     public static final boolean ENABLE_LOGGING = true;
+    public static final long MAX_LOG_TIME_WAIT = 10;
 }
