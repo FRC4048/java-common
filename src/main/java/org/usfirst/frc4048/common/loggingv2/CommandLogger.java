@@ -22,26 +22,26 @@ public class CommandLogger {
             return;
         }
         CommandScheduler.getInstance().onCommandInitialize(command -> {
-            toLogCommandStatus.computeIfAbsent(new CommandKey(command.toString()), k-> new LinkedList<>()).add(true);
+            toLogCommandStatus.computeIfAbsent(new CommandKey(command.toString()), k -> new LinkedList<>()).add(true);
         });
         CommandScheduler.getInstance().onCommandFinish(command -> {
-            toLogCommandStatus.computeIfAbsent(new CommandKey(command.toString()), k-> new LinkedList<>()).add(false);
+            toLogCommandStatus.computeIfAbsent(new CommandKey(command.toString()), k -> new LinkedList<>()).add(false);
         });
         CommandScheduler.getInstance().onCommandInterrupt(command -> {
-            toLogCommandStatus.computeIfAbsent(new CommandKey(command.toString()), k-> new LinkedList<>()).add(false);
+            toLogCommandStatus.computeIfAbsent(new CommandKey(command.toString()), k -> new LinkedList<>()).add(false);
         });
         hasInit = true;
     }
 
     public void log() {
         Iterator<Map.Entry<CommandKey, Queue<Boolean>>> iterator = toLogCommandStatus.entrySet().iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Map.Entry<CommandKey, Queue<Boolean>> entry = iterator.next();
             Boolean poll = entry.getValue().poll();
             if (poll != null) {
                 Logger.recordOutput("Command/" + entry.getKey().toString(), poll);
             }
-            if (entry.getValue().isEmpty()){
+            if (entry.getValue().isEmpty()) {
                 iterator.remove();
             }
         }
