@@ -7,7 +7,7 @@ import org.littletonrobotics.junction.Logger;
 import java.util.*;
 
 public class CommandLogger {
-    private final LinkedHashMap<CommandKey, Queue<Boolean>> toLogCommandStatus = new LinkedHashMap<>();
+    private final Map<CommandKey, Queue<Boolean>> toLogCommandStatus = new LinkedHashMap<>();
     private static final CommandLogger inst = new CommandLogger();
     private boolean hasInit;
 
@@ -18,21 +18,17 @@ public class CommandLogger {
     private CommandLogger() {}
 
     public void init() {
-        if (hasInit) return;
+        if (hasInit) {
+            return;
+        }
         CommandScheduler.getInstance().onCommandInitialize(command -> {
-            Queue<Boolean> toLogBools = toLogCommandStatus.getOrDefault(command, new LinkedList<>());
-            toLogBools.add(true);
-            toLogCommandStatus.put(new CommandKey(command.toString()), toLogBools);
+            toLogCommandStatus.computeIfAbsent(new CommandKey(command.toString()), k-> new LinkedList<>()).add(true);
         });
         CommandScheduler.getInstance().onCommandFinish(command -> {
-            Queue<Boolean> toLogBools = toLogCommandStatus.getOrDefault(command, new LinkedList<>());
-            toLogBools.add(false);
-            toLogCommandStatus.put(new CommandKey(command.toString()), toLogBools);
+            toLogCommandStatus.computeIfAbsent(new CommandKey(command.toString()), k-> new LinkedList<>()).add(false);
         });
         CommandScheduler.getInstance().onCommandInterrupt(command -> {
-            Queue<Boolean> toLogBools = toLogCommandStatus.getOrDefault(command, new LinkedList<>());
-            toLogBools.add(false);
-            toLogCommandStatus.put(new CommandKey(command.toString()), toLogBools);
+            toLogCommandStatus.computeIfAbsent(new CommandKey(command.toString()), k-> new LinkedList<>()).add(false);
         });
         hasInit = true;
     }
@@ -45,7 +41,7 @@ public class CommandLogger {
             if (poll != null) {
                 Logger.recordOutput("Command/" + entry.getKey().toString(), poll);
             }
-            if (entry.getValue().peek() == null){
+            if (entry.getValue().isEmpty()){
                 iterator.remove();
             }
         }

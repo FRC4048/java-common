@@ -3,12 +3,9 @@ package org.usfirst.frc4048.common.loggingv2;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 
-import java.util.Objects;
 import java.util.Set;
 
-public class LoggableCommandWrapper extends Command implements Loggable {
-    private String basicName = getClass().getSimpleName();
-    private Command parent = new BlankCommand();
+public class LoggableCommandWrapper extends LoggableCommand {
     private final Command wrap;
 
     public LoggableCommandWrapper(Command toWrap) {
@@ -17,31 +14,6 @@ public class LoggableCommandWrapper extends Command implements Loggable {
 
     public static LoggableCommandWrapper wrap(Command toWrap) {
         return new LoggableCommandWrapper(toWrap);
-    }
-
-    @Override
-    public String getBasicName() {
-        return basicName;
-    }
-
-    @Override
-    public String toString() {
-        String prefix = parent.toString();
-        if (!prefix.isBlank()){
-            prefix = prefix.substring(0,prefix.length() - 5);
-            prefix += "/";
-        }
-        return prefix + getBasicName() + "/inst";
-    }
-
-    @Override
-    public void setParent(Command loggable) {
-        this.parent = loggable == null ? new BlankCommand() : loggable;
-    }
-
-    public LoggableCommandWrapper withBasicName(String name) {
-        basicName = name;
-        return this;
     }
 
     @Override

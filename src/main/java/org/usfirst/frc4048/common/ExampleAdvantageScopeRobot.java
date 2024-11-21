@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ExampleAdvantageScopeRobot extends LoggedRobot {
-    private static final ConcurrentLinkedQueue<Runnable> runInMainThread = new ConcurrentLinkedQueue<>();
+    private static final ConcurrentLinkedQueue<Runnable> logsToMainThread = new ConcurrentLinkedQueue<>();
 
     private static final AtomicReference<RobotMode> mode = new AtomicReference<>(RobotMode.DISABLED);
 
@@ -50,12 +50,12 @@ public class ExampleAdvantageScopeRobot extends LoggedRobot {
         if (Constants.ENABLE_LOGGING){
             CommandLogger.get().log();
             long startTime = Logger.getRealTimestamp();
-            Runnable poll = runInMainThread.poll();
+            Runnable poll = logsToMainThread.poll();
             while (poll != null){
                 poll.run();
                 if (Logger.getRealTimestamp() - startTime <= 3000){
-                    poll = runInMainThread.poll();
-                }else {
+                    poll = logsToMainThread.poll();
+                } else {
                     break;
                 }
             }
@@ -95,6 +95,6 @@ public class ExampleAdvantageScopeRobot extends LoggedRobot {
     }
 
     public static void runInMainThread(Runnable r){
-        runInMainThread.add(r);
+        logsToMainThread.add(r);
     }
 }
