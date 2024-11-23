@@ -1,8 +1,9 @@
 package org.usfirst.frc4048.common.apriltags;
 
 import edu.wpi.first.networktables.*;
+import org.usfirst.frc4048.common.util.LoggableIO;
 
-public class NtApriltag implements ApriltagIO {
+public class NtApriltag implements LoggableIO<ApriltagInputs> {
     private final DoubleArraySubscriber visionMeasurementSubscriber;
     private final IntegerArraySubscriber apriltagIdSubscriber;
 

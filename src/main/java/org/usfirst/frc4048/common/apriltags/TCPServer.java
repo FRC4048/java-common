@@ -46,7 +46,7 @@ public abstract class TCPServer<T> extends Thread {
     public void run() {
         while (running) {
             if (serverSocket == null) {
-                exit();
+                escape();
                 return;
             }
             if (this.clientSocket == null) {
@@ -88,7 +88,7 @@ public abstract class TCPServer<T> extends Thread {
         return s;
     }
 
-    public void exit() {
+    public void escape() {
         this.running = false;
         try {
             if (bufferedInputStream != null) {
@@ -110,6 +110,7 @@ public abstract class TCPServer<T> extends Thread {
             DriverStation.reportError("Could not release thread resources!", true);
         }
     }
+
 
     public Queue<T> flush() {
         Queue<T> queue = new LinkedList<>();
