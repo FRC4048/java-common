@@ -30,7 +30,7 @@ public abstract class TCPServer<T> extends Thread {
 
 
     @Override
-    public synchronized void start() {
+    public void run() {
         try {
             this.serverSocket = new ServerSocket(port);
             this.clientSocket = null;
@@ -39,11 +39,6 @@ public abstract class TCPServer<T> extends Thread {
             this.serverSocket = null;
         }
         running = true;
-        super.start();
-    }
-
-    @Override
-    public void run() {
         while (running) {
             if (serverSocket == null) {
                 escape();
@@ -103,9 +98,6 @@ public abstract class TCPServer<T> extends Thread {
             if (serverSocket != null) {
                 serverSocket.close();
             }
-            this.join();
-        } catch (InterruptedException e) {
-            DriverStation.reportError("THREAD WONT STOP!", true);
         } catch (IOException e) {
             DriverStation.reportError("Could not release thread resources!", true);
         }
