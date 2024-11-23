@@ -57,7 +57,7 @@ public class CommandLogger {
             if (now - startTime <= Constants.MAX_LOG_TIME_WAIT){
                 poll = logsToMainThread.poll();
             } else {
-                Logger.recordOutput("LOGGING_ERROR", "Took To Long @" + now);
+                Logger.recordOutput("LOGGING_ERROR", "Logging took too long @" + now);
                 break;
             }
         }
@@ -77,89 +77,89 @@ public class CommandLogger {
         }
     }
 
-    public void queueLogMessage(String key, byte[] value) {
+    public void logMessage(String key, byte[] value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public void queueLogMessage(String key, boolean value) {
+    public void logMessage(String key, boolean value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public void queueLogMessage(String key, int value) {
+    public void logMessage(String key, int value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public void queueLogMessage(String key, long value) {
+    public void logMessage(String key, long value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public void queueLogMessage(String key, float value) {
+    public void logMessage(String key, float value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public void queueLogMessage(String key, double value) {
+    public void logMessage(String key, double value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public void queueLogMessage(String key, String value) {
+    public void logMessage(String key, String value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public <E extends Enum<E>> void queueLogMessage(String key, E value) {
+    public <E extends Enum<E>> void logMessage(String key, E value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public <U extends Unit<U>> void queueLogMessage(String key, Measure<U> value) {
+    public <U extends Unit<U>> void logMessage(String key, Measure<U> value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public void queueLogMessage(String key, boolean[] value) {
+    public void logMessage(String key, boolean[] value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public void queueLogMessage(String key, int[] value) {
+    public void logMessage(String key, int[] value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public void queueLogMessage(String key, long[] value) {
+    public void logMessage(String key, long[] value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public void queueLogMessage(String key, float[] value) {
+    public void logMessage(String key, float[] value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public void queueLogMessage(String key, double[] value) {
+    public void logMessage(String key, double[] value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public void queueLogMessage(String key, String[] value) {
+    public void logMessage(String key, String[] value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public <T> void queueLogMessage(String key, Struct<T> struct, T value) {
+    public <T> void logMessage(String key, Struct<T> struct, T value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, struct, value));
     }
 
     @SafeVarargs
-    public final <T> void queueLogMessage(String key, Struct<T> struct, T... value) {
+    public final <T> void logMessage(String key, Struct<T> struct, T... value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, struct, value));
     }
 
-    public <T, MessageType extends ProtoMessage<?>> void queueLogMessage(String key, Protobuf<T, MessageType> proto, T value) {
+    public <T, MessageType extends ProtoMessage<?>> void logMessage(String key, Protobuf<T, MessageType> proto, T value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, proto, value));
     }
 
-    public <T extends WPISerializable> void queueLogMessage(String key, T value) {
+    public <T extends WPISerializable> void logMessage(String key, T value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
     @SafeVarargs
-    public final <T extends StructSerializable> void queueLogMessage(String key, T... value) {
+    public final <T extends StructSerializable> void logMessage(String key, T... value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 
-    public void queueLogMessage(String key, Mechanism2d value) {
+    public void logMessage(String key, Mechanism2d value) {
         logsToMainThread.add(() -> Logger.recordOutput(key, value));
     }
 }
