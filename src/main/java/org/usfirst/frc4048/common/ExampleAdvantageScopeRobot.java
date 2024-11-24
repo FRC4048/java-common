@@ -4,7 +4,6 @@
 
 package org.usfirst.frc4048.common;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import org.usfirst.frc4048.common.BuildConstants;
 import org.usfirst.frc4048.common.loggingv2.CommandLogger;
 import org.usfirst.frc4048.common.util.RobotMode;
 import org.littletonrobotics.junction.LogFileUtil;
@@ -13,11 +12,9 @@ import org.littletonrobotics.junction.Logger;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ExampleAdvantageScopeRobot extends LoggedRobot {
-    private static final ConcurrentLinkedQueue<Runnable> logsToMainThread = new ConcurrentLinkedQueue<>();
 
     private static final AtomicReference<RobotMode> mode = new AtomicReference<>(RobotMode.DISABLED);
 
@@ -49,18 +46,6 @@ public class ExampleAdvantageScopeRobot extends LoggedRobot {
         CommandScheduler.getInstance().run();
         if (Constants.ENABLE_LOGGING){
             CommandLogger.get().log();
-            long startTime = Logger.getRealTimestamp();
-            Runnable poll = logsToMainThread.poll();
-            while (poll != null){
-                poll.run();
-                long now = Logger.getRealTimestamp();
-                if (now - startTime <= Constants.MAX_LOG_TIME_WAIT){
-                    poll = logsToMainThread.poll();
-                } else {
-                    Logger.recordOutput("LOGGING_ERROR", "Took To Long @" + now);
-                    break;
-                }
-            }
         }
 
     }
@@ -96,7 +81,4 @@ public class ExampleAdvantageScopeRobot extends LoggedRobot {
         mode.set(RobotMode.SIMULATION);
     }
 
-    public static void runInMainThread(Runnable r){
-        logsToMainThread.add(r);
-    }
 }
