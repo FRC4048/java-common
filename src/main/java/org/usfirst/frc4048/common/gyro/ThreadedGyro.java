@@ -55,4 +55,7 @@ public class ThreadedGyro {
         shouldOffset.set(true);
     }
 
+    public double getAngleOffset() {
+        return Double.longBitsToDouble(gyroOffset.get());
+    }
 }

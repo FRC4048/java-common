@@ -4,7 +4,6 @@ import com.kauailabs.navx.frc.AHRS;
 
 public class RealGyroIO implements GyroIO {
     private final ThreadedGyro gyro;
-    private double angleOffset = 0;
 
     public RealGyroIO() {
         this.gyro = new ThreadedGyro(new AHRS());
@@ -13,8 +12,7 @@ public class RealGyroIO implements GyroIO {
 
     @Override
     public void setAngleOffset(double offset) {
-        this.angleOffset = offset;
-        gyro.setAngleAdjustment(angleOffset);
+        gyro.setAngleAdjustment(offset);
     }
 
     @Override
@@ -25,6 +23,6 @@ public class RealGyroIO implements GyroIO {
     @Override
     public void updateInputs(GyroInputs inputs) {
         inputs.anglesInDeg = gyro.getGyroValue();
-        inputs.angleOffset = angleOffset;
+        inputs.angleOffset = gyro.getAngleOffset();
     }
 }
