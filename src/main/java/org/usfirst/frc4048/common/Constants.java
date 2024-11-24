@@ -9,4 +9,5 @@ public class Constants {
     public static final double MAX_VELOCITY = 1.0;
     public static final boolean ENABLE_LOGGING = true;
     public static final long MAX_LOG_TIME_WAIT = 10;
+    public static final long GYRO_THREAD_RATE_MS = 10;
 }
