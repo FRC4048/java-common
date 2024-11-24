@@ -42,7 +42,7 @@ public abstract class TCPServer<T> extends Thread {
         while (running) {
             if (serverSocket == null) {
                 escape();
-                return;
+                continue;
             }
             if (this.clientSocket == null) {
                 clientSocket = waitForClient();
