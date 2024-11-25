@@ -48,6 +48,7 @@ public class ThreadedGyro {
             return executor.awaitTermination(maxTime, timeUnit);
         } catch (InterruptedException e) {
             DriverStation.reportError("ThreadedGyro thread termination was interrupted: " + e.getMessage(), true);
+            return false;
         }
     }
 
