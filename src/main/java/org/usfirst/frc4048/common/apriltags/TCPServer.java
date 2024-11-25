@@ -1,6 +1,8 @@
 package org.usfirst.frc4048.common.apriltags;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import org.usfirst.frc4048.common.Constants;
+import org.usfirst.frc4048.common.loggingv2.CommandLogger;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -33,6 +35,7 @@ public abstract class TCPServer<T> extends Thread {
     public void run() {
         try {
             this.serverSocket = new ServerSocket(port);
+            this.serverSocket.setSoTimeout(Constants.SERVER_SOCKET_CONNECTION_TIMEOUT);
             this.clientSocket = null;
         } catch (IOException e2) {
             DriverStation.reportError("Could not start server on port " + port, true);
@@ -76,9 +79,15 @@ public abstract class TCPServer<T> extends Thread {
         Socket s;
         try {
             s = serverSocket.accept();
+            CommandLogger.get().logMessage("TCP Client Connection Status", true);
         } catch (IOException e1) {
-            DriverStation.reportError("Could not connect to client on port " + port, true);
+            CommandLogger.get().logMessage("TCP Client Connection Status", false);
             s = null;
+        }
+        try {
+            Thread.sleep(Constants.SERVER_SOCKET_ATTEMPT_DELAY);
+        } catch (InterruptedException e) {
+            DriverStation.reportError("TCP Server thread interrupted: " + e.getMessage(), true);
         }
         return s;
     }
@@ -100,6 +109,8 @@ public abstract class TCPServer<T> extends Thread {
             }
         } catch (IOException e) {
             DriverStation.reportError("Could not release thread resources!", true);
+        }finally {
+            CommandLogger.get().logMessage("TCP Client Connection Status", false);
         }
     }
 
