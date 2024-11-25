@@ -38,6 +38,10 @@ public class ThreadedGyro {
         },0, Constants.GYRO_THREAD_RATE_MS, TimeUnit.MILLISECONDS);
     }
 
+    public void stop(){
+        executor.shutdown();
+    }
+
     private void updateGyro() {
         lastGyro.set(Double.doubleToLongBits(((gyro.getAngle()) % 360)  * -1));
     }
