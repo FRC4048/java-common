@@ -1,6 +1,7 @@
 package org.usfirst.frc4048.common.gyro;
 
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.DriverStation;
 import org.usfirst.frc4048.common.Constants;
 
 import java.util.concurrent.Executors;
@@ -39,8 +40,17 @@ public class ThreadedGyro {
     }
 
     public void stop(){
-        executor.shutdown();
+        executor.shutdownNow();
     }
+    public boolean stopAndWait(long maxTime, TimeUnit timeUnit){
+        executor.shutdownNow();
+        try {
+            return executor.awaitTermination(maxTime, timeUnit);
+        } catch (InterruptedException e) {
+            DriverStation.reportError("ThreadedGyro thread termination was interrupted: " + e.getMessage(), true);
+        }
+    }
+
 
     private void updateGyro() {
         lastGyro.set(Double.doubleToLongBits(((gyro.getAngle()) % 360)  * -1));
