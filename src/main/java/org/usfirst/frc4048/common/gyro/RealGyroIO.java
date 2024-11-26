@@ -5,8 +5,8 @@ import com.kauailabs.navx.frc.AHRS;
 public class RealGyroIO implements GyroIO {
     private final ThreadedGyro gyro;
 
-    public RealGyroIO() {
-        this.gyro = new ThreadedGyro(new AHRS());
+    public RealGyroIO(ThreadedGyro gyro) {
+        this.gyro = gyro;
         gyro.start();
     }
 
