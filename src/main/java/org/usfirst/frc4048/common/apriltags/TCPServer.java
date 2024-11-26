@@ -1,6 +1,8 @@
 package org.usfirst.frc4048.common.apriltags;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import org.usfirst.frc4048.common.Constants;
+import org.usfirst.frc4048.common.loggingv2.CommandLogger;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -30,24 +32,20 @@ public abstract class TCPServer<T> extends Thread {
 
 
     @Override
-    public synchronized void start() {
+    public void run() {
         try {
             this.serverSocket = new ServerSocket(port);
+            this.serverSocket.setSoTimeout(Constants.SERVER_SOCKET_CONNECTION_TIMEOUT);
             this.clientSocket = null;
         } catch (IOException e2) {
             DriverStation.reportError("Could not start server on port " + port, true);
             this.serverSocket = null;
         }
         running = true;
-        super.start();
-    }
-
-    @Override
-    public void run() {
         while (running) {
             if (serverSocket == null) {
-                exit();
-                return;
+                escape();
+                continue;
             }
             if (this.clientSocket == null) {
                 clientSocket = waitForClient();
@@ -81,14 +79,20 @@ public abstract class TCPServer<T> extends Thread {
         Socket s;
         try {
             s = serverSocket.accept();
+            CommandLogger.get().logMessage("TCP Client Connection Status", true);
         } catch (IOException e1) {
-            DriverStation.reportError("Could not connect to client on port " + port, true);
+            CommandLogger.get().logMessage("TCP Client Connection Status", false);
             s = null;
+        }
+        try {
+            Thread.sleep(Constants.SERVER_SOCKET_ATTEMPT_DELAY);
+        } catch (InterruptedException e) {
+            DriverStation.reportError("TCP Server thread interrupted: " + e.getMessage(), true);
         }
         return s;
     }
 
-    public void exit() {
+    public void escape() {
         this.running = false;
         try {
             if (bufferedInputStream != null) {
@@ -103,13 +107,13 @@ public abstract class TCPServer<T> extends Thread {
             if (serverSocket != null) {
                 serverSocket.close();
             }
-            this.join();
-        } catch (InterruptedException e) {
-            DriverStation.reportError("THREAD WONT STOP!", true);
         } catch (IOException e) {
             DriverStation.reportError("Could not release thread resources!", true);
+        }finally {
+            CommandLogger.get().logMessage("TCP Client Connection Status", false);
         }
     }
+
 
     public Queue<T> flush() {
         Queue<T> queue = new LinkedList<>();

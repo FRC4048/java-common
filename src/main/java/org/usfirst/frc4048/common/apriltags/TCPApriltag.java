@@ -1,15 +1,16 @@
 package org.usfirst.frc4048.common.apriltags;
 
 import org.littletonrobotics.junction.Logger;
+import org.usfirst.frc4048.common.util.LoggableIO;
 
 import java.util.Queue;
 
-public class TCPApriltag implements ApriltagIO {
+public class TCPApriltag implements LoggableIO<ApriltagInputs> {
     private static final int PORT = 5806;
-    private final TCPAriltagServer server;
+    private final TCPApriltagServer server;
 
     public TCPApriltag() {
-        server = new TCPAriltagServer(PORT);
+        server = new TCPApriltagServer(PORT);
         server.start();
     }
 

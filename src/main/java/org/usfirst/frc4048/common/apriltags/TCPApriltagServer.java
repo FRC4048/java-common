@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.Timer;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-public class TCPAriltagServer extends TCPServer<ApriltagReading> {
+public class TCPApriltagServer extends TCPServer<ApriltagReading> {
 
-    public TCPAriltagServer(int port) {
+    public TCPApriltagServer(int port) {
         super(port);
     }
 
