@@ -11,4 +11,5 @@ public class Constants {
     public static final long MAX_LOG_TIME_WAIT = 10;
     public static final int SERVER_SOCKET_CONNECTION_TIMEOUT = 2000;
     public static final int SERVER_SOCKET_ATTEMPT_DELAY = 100;
+    public static final long GYRO_THREAD_RATE_MS = 10;
 }
