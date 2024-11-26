@@ -7,7 +7,6 @@ public class RealGyroIO implements GyroIO {
 
     public RealGyroIO(ThreadedGyro gyro) {
         this.gyro = gyro;
-        gyro.start();
     }
 
     @Override
