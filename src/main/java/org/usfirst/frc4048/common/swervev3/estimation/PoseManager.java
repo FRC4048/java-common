@@ -10,7 +10,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.numbers.N3;
 import org.usfirst.frc4048.common.swervev3.bags.OdometryMeasurement;
 import org.usfirst.frc4048.common.swervev3.bags.VisionMeasurement;
-import org.usfirst.frc4048.common.swervev3.vision.PoseDivation;
+import org.usfirst.frc4048.common.swervev3.vision.PoseDeviation;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -20,19 +20,19 @@ public class PoseManager {
     private final SwerveDrivePoseEstimator poseEstimator;
     protected final Queue<VisionMeasurement> visionMeasurementQueue = new LinkedList<>();
 
-    public PoseManager(PoseDivation PoseDivation, SwerveDriveKinematics kinematics, OdometryMeasurement initialOdom, TimeInterpolatableBuffer<Pose2d> estimatedPoseBuffer) {
+    public PoseManager(PoseDeviation PoseDeviation, SwerveDriveKinematics kinematics, OdometryMeasurement initialOdom, TimeInterpolatableBuffer<Pose2d> estimatedPoseBuffer) {
         this.poseEstimator = new SwerveDrivePoseEstimator(kinematics,
                 Rotation2d.fromDegrees(initialOdom.gyroValueDeg()),
                 initialOdom.modulePosition(),
                 new Pose2d(),
-                PoseDivation.getWheelStd(),
-                PoseDivation.getVisionStd()
+                PoseDeviation.getWheelStd(),
+                PoseDeviation.getVisionStd()
         );
         this.estimatedPoseBuffer = estimatedPoseBuffer;
     }
 
     public PoseManager(Vector<N3> wheelStd, Vector<N3> visionStd, SwerveDriveKinematics kinematics, OdometryMeasurement initialOdom, TimeInterpolatableBuffer<Pose2d> estimatedPoseBuffer) {
-        this(new PoseDivation(wheelStd, visionStd), kinematics, initialOdom, estimatedPoseBuffer);
+        this(new PoseDeviation(wheelStd, visionStd), kinematics, initialOdom, estimatedPoseBuffer);
     }
 
     public void addOdomMeasurement(OdometryMeasurement m, long timestamp){

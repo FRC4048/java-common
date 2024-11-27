@@ -20,6 +20,7 @@ import org.usfirst.frc4048.common.Constants;
 import org.usfirst.frc4048.common.ExampleAdvantageScopeRobot;
 import org.usfirst.frc4048.common.apriltags.ApriltagIO;
 import org.usfirst.frc4048.common.apriltags.ApriltagInputs;
+import org.usfirst.frc4048.common.loggingv2.CommandLogger;
 import org.usfirst.frc4048.common.swervev3.bags.OdometryMeasurement;
 import org.usfirst.frc4048.common.swervev3.bags.VisionMeasurement;
 import org.usfirst.frc4048.common.swervev3.vision.BasicVisionFilter;
@@ -50,6 +51,7 @@ public class PoseEstimator {
     private static final Transform2d cameraOneTransform = new Transform2d(Constants.CAMERA_OFFSET_FROM_CENTER_X, Constants.CAMERA_OFFSET_FROM_CENTER_Y, new Rotation2d());
     private static final Transform2d cameraTwoTransform = new Transform2d(Constants.CAMERA_OFFSET_FROM_CENTER_X, Constants.CAMERA_OFFSET_FROM_CENTER_Y, new Rotation2d());
     private final PoseManager poseManager;
+    private int invalidApriltagNum;
 
     public PoseEstimator(Module frontLeftMotor, Module frontRightMotor, Module backLeftMotor, Module backRightMotor, ApriltagIO apriltagIO, SwerveDriveKinematics kinematics, double initGyroValueDeg) {
         this.frontLeft = frontLeftMotor;
@@ -57,6 +59,7 @@ public class PoseEstimator {
         this.backLeft = backLeftMotor;
         this.backRight = backRightMotor;
         this.apriltagSystem = new LoggableSystem<>(apriltagIO, new ApriltagInputs());
+        invalidApriltagNum = 0;
         OdometryMeasurement initMeasurement = new OdometryMeasurement(
                 new SwerveModulePosition[]{
                         frontLeft.getPosition(),
@@ -105,7 +108,13 @@ public class PoseEstimator {
                 if (validAprilTagPose(pos)) {
                     double diff = apriltagSystem.getInputs().serverTime[i] - apriltagSystem.getInputs().timestamp[i];
                     double latencyInSec = diff / 1000;
-                    VisionMeasurement measurement = new VisionMeasurement(new Pose2d(pos[0], pos[1], getEstimatedPose1().getRotation()), Apriltag.of(apriltagSystem.getInputs().apriltagNumber[i]), latencyInSec);
+                    Apriltag apriltag = Apriltag.of(apriltagSystem.getInputs().apriltagNumber[i]);
+                    if (apriltag == null){
+                        invalidApriltagNum++;
+                        CommandLogger.get().logMessage("InvalidApriltagNumber", invalidApriltagNum);
+                        continue;
+                    }
+                    VisionMeasurement measurement = new VisionMeasurement(new Pose2d(pos[0], pos[1], getEstimatedPose1().getRotation()), apriltag, latencyInSec);
                     poseManager.registerVisionMeasurement(measurement);
                 }
             }

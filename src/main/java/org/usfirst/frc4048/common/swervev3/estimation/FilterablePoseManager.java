@@ -9,7 +9,7 @@ import org.littletonrobotics.junction.Logger;
 import org.usfirst.frc4048.common.swervev3.bags.OdometryMeasurement;
 import org.usfirst.frc4048.common.swervev3.bags.VisionMeasurement;
 import org.usfirst.frc4048.common.swervev3.vision.FilterResult;
-import org.usfirst.frc4048.common.swervev3.vision.PoseDivation;
+import org.usfirst.frc4048.common.swervev3.vision.PoseDeviation;
 import org.usfirst.frc4048.common.swervev3.vision.VisionFilter;
 
 import java.util.LinkedHashMap;
@@ -18,13 +18,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class FilterablePoseManager extends PoseManager {
     private final VisionFilter filter;
 
-    public FilterablePoseManager(PoseDivation PoseDivation, SwerveDriveKinematics kinematics, OdometryMeasurement initialOdom, TimeInterpolatableBuffer<Pose2d> estimatedPoseBuffer, VisionFilter filter) {
-        super(PoseDivation, kinematics, initialOdom, estimatedPoseBuffer);
+    public FilterablePoseManager(PoseDeviation PoseDeviation, SwerveDriveKinematics kinematics, OdometryMeasurement initialOdom, TimeInterpolatableBuffer<Pose2d> estimatedPoseBuffer, VisionFilter filter) {
+        super(PoseDeviation, kinematics, initialOdom, estimatedPoseBuffer);
         this.filter = filter;
     }
 
     public FilterablePoseManager(Vector<N3> wheelStd, Vector<N3> visionStd, SwerveDriveKinematics kinematics, OdometryMeasurement initialOdom, TimeInterpolatableBuffer<Pose2d> estimatedPoseBuffer, VisionFilter filter) {
-        this(new PoseDivation(wheelStd, visionStd), kinematics, initialOdom, estimatedPoseBuffer, filter);
+        this(new PoseDeviation(wheelStd, visionStd), kinematics, initialOdom, estimatedPoseBuffer, filter);
     }
 
     @Override
