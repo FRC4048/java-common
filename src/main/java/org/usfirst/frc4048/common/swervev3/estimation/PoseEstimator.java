@@ -114,7 +114,7 @@ public class PoseEstimator {
                         CommandLogger.get().logMessage("InvalidApriltagNumber", invalidApriltagNum);
                         continue;
                     }
-                    VisionMeasurement measurement = new VisionMeasurement(new Pose2d(pos[0], pos[1], getEstimatedPose1().getRotation()), apriltag, latencyInSec);
+                    VisionMeasurement measurement = new VisionMeasurement(new Pose2d(pos[0], pos[1], getEstimatedPose().getRotation()), apriltag, latencyInSec);
                     poseManager.registerVisionMeasurement(measurement);
                 }
             }

@@ -139,7 +139,7 @@ public class SwerveDrivetrain extends SubsystemBase {
     }
 
     public Pose2d getPose() {
-        return poseEstimator.getEstimatedPose1();
+        return poseEstimator.getEstimatedPose();
     }
 
     public void setGyroOffset(double offset) {
