@@ -140,7 +140,7 @@ public class PoseEstimator {
     }
 
     @AutoLogOutput
-    public Pose2d getEstimatedPose1() {
+    public Pose2d getEstimatedPose() {
         return poseManager.getEstimatedPosition();
     }
 
