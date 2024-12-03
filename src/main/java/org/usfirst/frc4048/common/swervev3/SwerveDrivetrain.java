@@ -1,6 +1,5 @@
 package org.usfirst.frc4048.common.swervev3;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -10,23 +9,21 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.usfirst.frc4048.common.Constants;
-import org.usfirst.frc4048.common.apriltags.ApriltagIO;
+import org.usfirst.frc4048.common.apriltags.ApriltagInputs;
 import org.usfirst.frc4048.common.gyro.GyroIO;
 import org.usfirst.frc4048.common.gyro.GyroInputs;
 import org.usfirst.frc4048.common.swervev3.bags.OdometryMeasurement;
 import org.usfirst.frc4048.common.swervev3.estimation.PoseEstimator;
-import org.usfirst.frc4048.common.swervev3.io.Module;
-import org.usfirst.frc4048.common.swervev3.io.ModuleIO;
-import org.usfirst.frc4048.common.swervev2.SwervePidConfig;
 import org.usfirst.frc4048.common.util.DriveMode;
+import org.usfirst.frc4048.common.util.LoggableIO;
 import org.usfirst.frc4048.common.util.LoggableSystem;
 import org.littletonrobotics.junction.Logger;
 
 public class SwerveDrivetrain extends SubsystemBase {
-    private final Module frontLeft;
-    private final Module frontRight;
-    private final Module backLeft;
-    private final Module backRight;
+    private final SwerveModule frontLeft;
+    private final SwerveModule frontRight;
+    private final SwerveModule backLeft;
+    private final SwerveModule backRight;
     private final Translation2d frontLeftLocation = new Translation2d(Constants.ROBOT_LENGTH / 2, Constants.ROBOT_WIDTH / 2);
     private final Translation2d frontRightLocation = new Translation2d(Constants.ROBOT_LENGTH / 2, -Constants.ROBOT_WIDTH / 2);
     private final Translation2d backLeftLocation = new Translation2d(-Constants.ROBOT_LENGTH / 2, Constants.ROBOT_WIDTH / 2);
@@ -36,11 +33,11 @@ public class SwerveDrivetrain extends SubsystemBase {
     private DriveMode driveMode = DriveMode.FIELD_CENTRIC;
     private final PoseEstimator poseEstimator;
 
-    public SwerveDrivetrain(ModuleIO frontLeftIO, ModuleIO frontRightIO, ModuleIO backLeftIO, ModuleIO backRightIO, GyroIO gyroIO, ApriltagIO apriltagIO, SwervePidConfig pidConfig) {
-        this.frontLeft = new Module(frontLeftIO, pidConfig, "frontLeft");
-        this.frontRight = new Module(frontRightIO, pidConfig, "frontRight");
-        this.backLeft = new Module(backLeftIO, pidConfig, "backLeft");
-        this.backRight = new Module(backRightIO, pidConfig, "backRight");
+    public SwerveDrivetrain(SwerveModule frontLeftModule, SwerveModule frontRightModule, SwerveModule backLeftModule, SwerveModule backRightModule, GyroIO gyroIO, LoggableIO<ApriltagInputs> apriltagIO) {
+        this.frontLeft = frontLeftModule;
+        this.frontRight = frontRightModule;
+        this.backLeft = backLeftModule;
+        this.backRight = backRightModule;
         this.gyroSystem = new LoggableSystem<>(gyroIO, new GyroInputs());
         this.poseEstimator = new PoseEstimator(frontLeft, frontRight, backLeft, backRight, apriltagIO, kinematics, getLastGyro());
     }

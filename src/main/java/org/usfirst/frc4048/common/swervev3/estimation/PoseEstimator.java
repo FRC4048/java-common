@@ -18,27 +18,25 @@ import org.littletonrobotics.junction.AutoLogOutput;
 import org.littletonrobotics.junction.Logger;
 import org.usfirst.frc4048.common.Constants;
 import org.usfirst.frc4048.common.ExampleAdvantageScopeRobot;
-import org.usfirst.frc4048.common.apriltags.ApriltagIO;
 import org.usfirst.frc4048.common.apriltags.ApriltagInputs;
 import org.usfirst.frc4048.common.loggingv2.CommandLogger;
 import org.usfirst.frc4048.common.swervev3.bags.OdometryMeasurement;
 import org.usfirst.frc4048.common.swervev3.bags.VisionMeasurement;
 import org.usfirst.frc4048.common.swervev3.vision.BasicVisionFilter;
 import org.usfirst.frc4048.common.util.Apriltag;
+import org.usfirst.frc4048.common.util.LoggableIO;
 import org.usfirst.frc4048.common.util.LoggableSystem;
 import org.usfirst.frc4048.common.util.RobotMode;
 import org.usfirst.frc4048.common.util.math.ArrayUtils;
-import org.usfirst.frc4048.common.swervev3.io.Module;
-
-import java.awt.*;
+import org.usfirst.frc4048.common.swervev3.SwerveModule;
 
 public class PoseEstimator {
     private final Field2d field = new Field2d();
-    private final Module frontLeft;
-    private final Module frontRight;
-    private final Module backLeft;
-    private final Module backRight;
-    private final LoggableSystem<ApriltagIO, ApriltagInputs> apriltagSystem;
+    private final SwerveModule frontLeft;
+    private final SwerveModule frontRight;
+    private final SwerveModule backLeft;
+    private final SwerveModule backRight;
+    private final LoggableSystem<LoggableIO<ApriltagInputs>, ApriltagInputs> apriltagSystem;
 
     /* standard deviation of robot states, the lower the numbers arm, the more we trust odometry */
     private static final Vector<N3> stateStdDevs1 = VecBuilder.fill(0.075, 0.075, 0.001);
@@ -53,7 +51,7 @@ public class PoseEstimator {
     private final PoseManager poseManager;
     private int invalidApriltagNum;
 
-    public PoseEstimator(Module frontLeftMotor, Module frontRightMotor, Module backLeftMotor, Module backRightMotor, ApriltagIO apriltagIO, SwerveDriveKinematics kinematics, double initGyroValueDeg) {
+    public PoseEstimator(SwerveModule frontLeftMotor, SwerveModule frontRightMotor, SwerveModule backLeftMotor, SwerveModule backRightMotor, LoggableIO<ApriltagInputs> apriltagIO, SwerveDriveKinematics kinematics, double initGyroValueDeg) {
         this.frontLeft = frontLeftMotor;
         this.frontRight = frontRightMotor;
         this.backLeft = backLeftMotor;

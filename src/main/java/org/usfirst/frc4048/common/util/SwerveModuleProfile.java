@@ -40,11 +40,11 @@ public enum SwerveModuleProfile {
         return backLeftInverted;
     }
 
-    public double getSteerRatio() {
+    public double getSteerGearRatio() {
         return steerRatio;
     }
 
-    public double getDriveRatio() {
+    public double getDriveGearRatio() {
         return driveRatio;
     }
 
