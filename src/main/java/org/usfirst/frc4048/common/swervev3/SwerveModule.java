@@ -83,10 +83,10 @@ public class SwerveModule {
         return new SwerveModulePosition(driveSystem.getInputs().driveEncoderPosition, new Rotation2d(steerSystem.getInputs().steerEncoderPosition));
     }
 
-    public static SwerveModule createModule(SwerveIdConfig idConf, KinematicsConversionConfig kinematicsConfig, SwervePidConfig pidConfig){
+    public static SwerveModule createModule(SwerveIdConfig idConf, KinematicsConversionConfig kinematicsConfig, SwervePidConfig pidConfig, String loggingKey){
         SparkMaxDriveMotorIO frontLeftDriveMotorIO = new SparkMaxDriveMotorIO(idConf.getDriveMotorId(), kinematicsConfig, kinematicsConfig.getProfile().isFrontLeftInverted());
         SparkMaxSteerMotorIO frontLeftSteerMotorIO = new SparkMaxSteerMotorIO(idConf.getTurnMotorId(), kinematicsConfig, kinematicsConfig.getProfile().isSteerInverted());
         CANCoderAbsIO frontLeftAbsIO = new CANCoderAbsIO(idConf.getCanCoderId());
-        return new SwerveModule(frontLeftDriveMotorIO, frontLeftSteerMotorIO, frontLeftAbsIO, pidConfig, "frontLeft");
+        return new SwerveModule(frontLeftDriveMotorIO, frontLeftSteerMotorIO, frontLeftAbsIO, pidConfig, loggingKey);
     }
 }
