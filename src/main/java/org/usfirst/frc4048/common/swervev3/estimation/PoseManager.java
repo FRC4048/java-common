@@ -15,6 +15,10 @@ import org.usfirst.frc4048.common.swervev3.vision.PoseDeviation;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Processes swerve odometry.
+ * Feeds odometry measurements and vision measurements into a Kalman Filter which outputs a combined robot position
+ */
 public class PoseManager {
     private final TimeInterpolatableBuffer<Pose2d> estimatedPoseBuffer;
     private final SwerveDrivePoseEstimator poseEstimator;

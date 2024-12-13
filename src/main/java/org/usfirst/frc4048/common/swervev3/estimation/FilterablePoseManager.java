@@ -15,6 +15,9 @@ import org.usfirst.frc4048.common.swervev3.vision.VisionFilter;
 import java.util.LinkedHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * A subclass of PoseManager that filters vision measurements before they are fed into the kalman filter.
+ */
 public class FilterablePoseManager extends PoseManager {
     private final VisionFilter filter;
 
