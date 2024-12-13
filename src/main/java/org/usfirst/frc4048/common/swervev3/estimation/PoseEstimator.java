@@ -30,6 +30,9 @@ import org.usfirst.frc4048.common.util.RobotMode;
 import org.usfirst.frc4048.common.util.math.ArrayUtils;
 import org.usfirst.frc4048.common.swervev3.io.SwerveModule;
 
+/**
+ * Class in charge of feeding odometry and apriltag measurements from their respective IOs into a {@link PoseManager} which outputs a robot position
+ */
 public class PoseEstimator {
     private final Field2d field = new Field2d();
     private final SwerveModule frontLeft;
