@@ -3,6 +3,9 @@ package org.usfirst.frc4048.common.swervev3.vision;
 import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.numbers.N3;
 
+/**
+ * POJO containing wheel encoder standard deviation and vision standard deviation
+ */
 public class PoseDeviation {
     private final Vector<N3> wheelStd;
     private final Vector<N3> visionStd;
