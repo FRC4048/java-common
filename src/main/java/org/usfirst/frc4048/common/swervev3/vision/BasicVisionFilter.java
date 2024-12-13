@@ -9,6 +9,14 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 import java.util.Queue;
 
+/**
+ * Vision filter implementation <br>
+ * Keeps track of robot position over time <br>
+ * Processes Vision measurements in batches of two <br>
+ * Only allows vision measurements to be processed if their delta change in position is close to
+ * the delta change in position of the robot odometry
+ *
+ */
 public abstract class BasicVisionFilter implements VisionFilter, VisionTransformer {
 
     private final TimeInterpolatableBuffer<Pose2d> poseBuffer;
