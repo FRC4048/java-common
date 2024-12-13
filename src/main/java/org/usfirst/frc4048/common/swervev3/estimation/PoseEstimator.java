@@ -99,6 +99,10 @@ public class PoseEstimator {
         return !ArrayUtils.allMatch(measurement, -1.0) && measurement.length == 3;
     }
 
+    /**
+     * Collects Apriltag measurement(s) from the IO and checks their validity.
+     * If they are valid they are sent to the {@link PoseManager} for further processing
+     */
     public void updateVision() {
         if (ExampleAdvantageScopeRobot.getMode().equals(RobotMode.TELEOP) && Constants.ENABLE_VISION) {
             for (int i = 0; i < apriltagSystem.getInputs().timestamp.length; i++) {
