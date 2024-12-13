@@ -14,6 +14,7 @@ import org.usfirst.frc4048.common.gyro.GyroIO;
 import org.usfirst.frc4048.common.gyro.GyroInputs;
 import org.usfirst.frc4048.common.swervev3.bags.OdometryMeasurement;
 import org.usfirst.frc4048.common.swervev3.estimation.PoseEstimator;
+import org.usfirst.frc4048.common.swervev3.io.SwerveModule;
 import org.usfirst.frc4048.common.util.DriveMode;
 import org.usfirst.frc4048.common.util.LoggableIO;
 import org.usfirst.frc4048.common.util.LoggableSystem;

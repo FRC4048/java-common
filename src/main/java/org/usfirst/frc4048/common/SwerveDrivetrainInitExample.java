@@ -13,15 +13,13 @@ import org.usfirst.frc4048.common.swervev2.SwerveIdConfig;
 import org.usfirst.frc4048.common.swervev2.SwervePidConfig;
 import org.usfirst.frc4048.common.swervev3.KinematicsConversionConfig;
 import org.usfirst.frc4048.common.swervev3.SwerveDrivetrain;
-import org.usfirst.frc4048.common.swervev3.SwerveModule;
-import org.usfirst.frc4048.common.swervev3.io.abs.CANCoderAbsIO;
+import org.usfirst.frc4048.common.swervev3.io.SwerveModule;
 import org.usfirst.frc4048.common.swervev3.io.abs.MockAbsIO;
 import org.usfirst.frc4048.common.swervev3.io.drive.MockDriveMotorIO;
-import org.usfirst.frc4048.common.swervev3.io.drive.SparkMaxDriveMotorIO;
 import org.usfirst.frc4048.common.swervev3.io.steer.MockSteerMotorIO;
-import org.usfirst.frc4048.common.swervev3.io.steer.SparkMaxSteerMotorIO;
 import org.usfirst.frc4048.common.util.Gain;
 import org.usfirst.frc4048.common.util.LoggableIO;
+import org.usfirst.frc4048.common.util.ModulePosition;
 import org.usfirst.frc4048.common.util.PID;
 
 public class SwerveDrivetrainInitExample {
@@ -38,27 +36,28 @@ public class SwerveDrivetrainInitExample {
 //        Gain driveGain = Gain.of(Constants.DRIVE_PID_FF_V, Constants.DRIVE_PID_FF_S);
 //        Gain steerGain = Gain.of(Constants.STEER_PID_FF_V, Constants.STEER_PID_FF_S);
 //
-//        KinematicsConversionConfig kinematicsConversionConfig = new KinematicsConversionConfig(Constants.WHEEL_RADIUS, Constants.SWERVE_MODULE_PROFILE);
+//        KinematicsConversionConfig kConfig = new KinematicsConversionConfig(Constants.WHEEL_RADIUS, Constants.SWERVE_MODULE_PROFILE);
 //        SwervePidConfig pidConfig = new SwervePidConfig(drivePid, steerPid, driveGain, steerGain, constraints);
+//
 //        SwerveModule frontLeft;
 //        SwerveModule frontRight;
 //        SwerveModule backLeft;
 //        SwerveModule backRight;
 //
 //        GyroIO gyroIO;
-//        LoggableIO<ApriltagInputs> apriltagIO;
-//
-//        if (ExampleAdvantageScopeRobot.isReal()){
-//            frontLeft = SwerveModule.createModule(frontLeftIdConf, kinematicsConversionConfig, pidConfig, "frontLeft");
-//            frontRight = SwerveModule.createModule(frontRightIdConf, kinematicsConversionConfig, pidConfig, "frontRight");
-//            backLeft = SwerveModule.createModule(backLeftIdConf, kinematicsConversionConfig, pidConfig, "backLeft");
-//            backRight = SwerveModule.createModule(backRightIdConf, kinematicsConversionConfig, pidConfig, "backRight");
+//        LoggableIO<ApriltagInputs> apriltagI
+//        O;
+//        if (Robot.isReal()) {
+//            frontLeft = SwerveModule.createModule(frontLeftIdConf, kConfig, pidConfig, ModulePosition.FRONT_LEFT);
+//            frontRight = SwerveModule.createModule(frontRightIdConf, kConfig, pidConfig, ModulePosition.FRONT_RIGHT);
+//            backLeft = SwerveModule.createModule(backLeftIdConf, kConfig, pidConfig, ModulePosition.BACK_LEFT);
+//            backRight = SwerveModule.createModule(backRightIdConf, kConfig, pidConfig, ModulePosition.BACK_RIGHT);
 //
 //            ThreadedGyro threadedGyro = new ThreadedGyro(new AHRS());
 //            threadedGyro.start();
 //            gyroIO = new RealGyroIO(threadedGyro);
 //            apriltagIO = new NtApriltag();
-//        }else{
+//        } else {
 //            frontLeft = new SwerveModule(new MockDriveMotorIO(), new MockSteerMotorIO(), new MockAbsIO(), pidConfig, "frontLeft");
 //            frontRight = new SwerveModule(new MockDriveMotorIO(), new MockSteerMotorIO(), new MockAbsIO(), pidConfig, "frontRight");
 //            backLeft = new SwerveModule(new MockDriveMotorIO(), new MockSteerMotorIO(), new MockAbsIO(), pidConfig, "backLeft");

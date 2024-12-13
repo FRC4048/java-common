@@ -28,7 +28,7 @@ import org.usfirst.frc4048.common.util.LoggableIO;
 import org.usfirst.frc4048.common.util.LoggableSystem;
 import org.usfirst.frc4048.common.util.RobotMode;
 import org.usfirst.frc4048.common.util.math.ArrayUtils;
-import org.usfirst.frc4048.common.swervev3.SwerveModule;
+import org.usfirst.frc4048.common.swervev3.io.SwerveModule;
 
 public class PoseEstimator {
     private final Field2d field = new Field2d();
