@@ -68,7 +68,6 @@ public class SwerveModule {
         absSystem.updateInputs();
         driveSystem.updateInputs();
         steerSystem.updateInputs();
-        Logger.recordOutput(steerSystem.getKey() + "/steerOffset", steerOffset);
     }
 
     public void stop() {
