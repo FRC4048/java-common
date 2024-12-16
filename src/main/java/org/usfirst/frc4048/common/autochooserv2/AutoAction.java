@@ -6,15 +6,15 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum AutoAction {
-    DoNothing("Do Nothing"),
-    ShootAndCross("Shoot & Cross"),
-    ShootFour("Shoot Four"),
-    ShootTwo("Shoot Two"),
-    ShootTwoDip("Shoot Two & Dip"),
-    Fork("Fork"),
-    SmartFork("Smart Fork"),
+    DO_NOTHING("Do Nothing"),
+    SHOOT_AND_CROSS("Shoot & Cross"),
+    SHOOT_FOUR("Shoot Four"),
+    SHOOT_TWO("Shoot Two"),
+    SHOOT_TWO_DIP("Shoot Two & Dip"),
+    FORK("Fork"),
+    SMART_FORK("Smart Fork"),
     SHOOT("Shoot & Stop"),
-    ShootWaitMove("Shoot Wait Move"),
+    SHOOT_WAIT_MOVE("Shoot Wait Move"),
     INVALID("INVALID");
     private final String name;
     private static final HashMap<String, AutoAction> nameMap = new HashMap<>(Arrays.stream(AutoAction.values()).collect(Collectors.toMap(AutoAction::getName, Function.identity())));
