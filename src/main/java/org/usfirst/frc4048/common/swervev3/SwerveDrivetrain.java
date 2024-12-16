@@ -19,8 +19,10 @@ import org.usfirst.frc4048.common.util.DriveMode;
 import org.usfirst.frc4048.common.util.LoggableIO;
 import org.usfirst.frc4048.common.util.LoggableSystem;
 import org.littletonrobotics.junction.Logger;
+import org.usfirst.frc4048.common.util.SwerveModuleProfile;
 
 public class SwerveDrivetrain extends SubsystemBase {
+    public static final SwerveModuleProfile SWERVE_MODULE_PROFILE = SwerveModuleProfile.MK4;
     private final SwerveModule frontLeft;
     private final SwerveModule frontRight;
     private final SwerveModule backLeft;
