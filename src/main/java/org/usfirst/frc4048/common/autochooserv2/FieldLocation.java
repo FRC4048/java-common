@@ -2,6 +2,8 @@ package org.usfirst.frc4048.common.autochooserv2;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.DriverStation;
+import org.usfirst.frc4048.common.ExampleAdvantageScopeRobot;
 import org.usfirst.frc4048.common.ExampleRobotContainer;
 
 import java.util.Arrays;
@@ -36,8 +38,8 @@ public enum FieldLocation {
      }
 
      public Pose2d getLocation(){
-          double x = ExampleRobotContainer.isRedAlliance() ? RED_X_POS - xPose: xPose;
-          double radian = ExampleRobotContainer.isRedAlliance() ? Math.PI-angle: angle;
+          double x = ExampleAdvantageScopeRobot.getAlliance().equals(DriverStation.Alliance.Red) ? RED_X_POS - xPose: xPose;
+          double radian = ExampleAdvantageScopeRobot.getAlliance().equals(DriverStation.Alliance.Red) ? Math.PI-angle: angle;
           return new Pose2d(x, yPos, Rotation2d.fromRadians(radian));
      }
 
