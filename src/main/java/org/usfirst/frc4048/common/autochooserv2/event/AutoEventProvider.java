@@ -9,8 +9,8 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
 /**
- * Superclass of {@link AutoEventProviderIO} that uses Network Tables to get
- * {@link AutoAction AutoActions} and {@link FieldLocation fieldLocations}<br>
+ * Class that contains a {@link AutoEventProviderIO} that uses Network Tables to get
+ * {@link AutoAction AutoActions} and {@link FieldLocation fieldLocations}
  */
 public class AutoEventProvider {
     private final LoggableSystem<AutoEventProviderIO, AutoChooserInputs> system;
@@ -25,11 +25,11 @@ public class AutoEventProvider {
     }
 
     public AutoAction getSelectedAction() {
-        return system.getInputs().action == null ? system.getInputs().defaultAction : system.getInputs().action;
+        return system.getInputs().action == AutoAction.INVALID ? system.getInputs().defaultAction : system.getInputs().action;
     }
 
     public FieldLocation getSelectedLocation() {
-        return system.getInputs().location == null ? system.getInputs().defaultLocation : system.getInputs().location;
+        return system.getInputs().location == FieldLocation.INVALID ? system.getInputs().defaultLocation : system.getInputs().location;
     }
 
     public void updateInputs() {
