@@ -22,4 +22,5 @@ public class Constants {
     public static final long POSE_BUFFER_STORAGE_TIME = 2;
     public static final double VISION_CONSISTANCY_THRESHOLD = 0.25;
     public static final long MAX_LOG_TIME_WAIT = 10;
+    public static final int LIGHTSTRIP_PORT = 0;
 }
