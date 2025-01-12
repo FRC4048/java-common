@@ -23,4 +23,7 @@ public class Constants {
     public static final double VISION_CONSISTANCY_THRESHOLD = 0.25;
     public static final long MAX_LOG_TIME_WAIT = 10;
     public static final int LIGHTSTRIP_PORT = 0;
+    public static final double GRAVITY = -9.8;
+    public static final double SHOOTER_VELOCITY = 10.56;//m/s @ 5500rpm, 3500rpm // 8.9 or 8.1 or 10.65 or
+    public static final double RAMP_FROM_CENTER = 0.17;
 }
