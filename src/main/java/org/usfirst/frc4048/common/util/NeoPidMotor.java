@@ -9,6 +9,7 @@ import com.revrobotics.spark.config.ClosedLoopConfig;
 import com.revrobotics.spark.config.LimitSwitchConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import static com.revrobotics.spark.SparkBase.PersistMode.kNoPersistParameters;
 import static com.revrobotics.spark.SparkBase.PersistMode.kPersistParameters;
 import static com.revrobotics.spark.SparkBase.ResetMode.kNoResetSafeParameters;
 import static com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters;
@@ -98,7 +99,7 @@ public class NeoPidMotor {
         SparkMaxConfig config = new SparkMaxConfig();
         config.closedLoop
                 .pid(pidP, pidI, pidD);
-        neoMotor.configure(config, kNoResetSafeParameters, kPersistParameters);
+        neoMotor.configure(config, kNoResetSafeParameters, kNoPersistParameters);
     }
 
     public void setPid(double pidP, double pidI, double pidD, double iZone, double pidFF) {
@@ -107,7 +108,7 @@ public class NeoPidMotor {
                 .pid(pidP, pidI, pidD)
                 .velocityFF(pidFF)
                 .iZone(iZone);
-        neoMotor.configure(config, kNoResetSafeParameters, kPersistParameters);
+        neoMotor.configure(config, kNoResetSafeParameters, kNoPersistParameters);
     }
 
     public SparkMax getNeoMotor() {
