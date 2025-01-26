@@ -1,6 +1,6 @@
 package org.usfirst.frc4048.common;
 
-import org.usfirst.frc4048.common.util.SwerveModuleProfile;
+import edu.wpi.first.math.util.Units;
 
 /**
  * Demo constants class to allow the other classes to compile
@@ -23,4 +23,10 @@ public class Constants {
     public static final double VISION_CONSISTANCY_THRESHOLD = 0.25;
     public static final long MAX_LOG_TIME_WAIT = 10;
     public static final int LIGHTSTRIP_PORT = 0;
+
+    public static final double kElevatorGearing = 10.0;
+    public static final double kElevatorDrumRadius = Units.inchesToMeters(2.0);
+    public static final double kCarriageMass = 4.0; // kg
+    public static final double kMinElevatorHeightMeters = 0.0;
+    public static final double kMaxElevatorHeightMeters = 10.0;
 }
