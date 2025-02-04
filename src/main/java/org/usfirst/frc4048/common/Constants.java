@@ -2,6 +2,9 @@ package org.usfirst.frc4048.common;
 
 import edu.wpi.first.math.util.Units;
 
+import static edu.wpi.first.units.Units.Degrees;
+import static edu.wpi.first.units.Units.Radians;
+
 /**
  * Demo constants class to allow the other classes to compile
  */
@@ -29,4 +32,9 @@ public class Constants {
     public static final double kCarriageMass = 4.0; // kg
     public static final double kMinElevatorHeightMeters = 0.0;
     public static final double kMaxElevatorHeightMeters = 10.0;
+    public static final double armGearing = 45.0;
+    public static final double armInertia = 1.0;
+    public static final double armLength = 0.5;
+    public static final double armMinAngle = Degrees.of(-90).in(Radians);
+    public static final double armMaxAngle = Degrees.of(75).in(Radians);
 }
